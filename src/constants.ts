@@ -56,3 +56,37 @@ export const STAT_CARDS: StatCardType[] = [
     color: COLORS.green,
   },
 ];
+
+export const SALES_DATA: { name: string; sales: number }[] = [
+  { name: 'Jul', sales: 4200 },
+  { name: 'Aug', sales: 3800 },
+  { name: 'Sep', sales: 5100 },
+  { name: 'Oct', sales: 4600 },
+  { name: 'Nov', sales: 5400 },
+  { name: 'Dec', sales: 7200 },
+  { name: 'Jan', sales: 6100 },
+  { name: 'Feb', sales: 5900 },
+  { name: 'Mar', sales: 6800 },
+  { name: 'Apr', sales: 6300 },
+  { name: 'May', sales: 7100 },
+  { name: 'Jun', sales: 7500 },
+];
+
+export const CATEGORY_DATA: { name: string; value: number; color: string }[] = [
+  { name: 'Electronics', value: 4500, color: COLORS.blue },
+  { name: 'Clothing', value: 3200, color: COLORS.purple },
+  { name: 'Home & Garden', value: 2800, color: COLORS.pink },
+  { name: 'Books', value: 2100, color: COLORS.green },
+  { name: 'Sports & Outdoors', value: 1900, color: COLORS.yellow },
+];
+
+export const SALES_CHANNEL_DATA: {
+  name: string;
+  value: number;
+  color: string;
+}[] = [
+  { name: 'Website', value: 45600, color: COLORS.blue },
+  { name: 'Mobile App', value: 38200, color: COLORS.purple },
+  { name: 'Marketplace', value: 29800, color: COLORS.pink },
+  { name: 'Social Media', value: 18700, color: COLORS.green },
+];

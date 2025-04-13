@@ -1,5 +1,15 @@
-export const Dashboard: React.FC = () => {
+interface DashboardProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+export const Dashboard: React.FC<DashboardProps> = ({ title, children }) => {
   return (
-    <div className="h-[200vh] w-full rounded-lg bg-white pb-4 shadow"></div>
+    <div className="h-[100vh] w-full rounded-lg bg-white pb-4 shadow">
+      <header className="mt-2 mb-4 border-b border-stone-200 px-4 pb-4">
+        <h1 className="block text-lg font-bold">{title}</h1>
+      </header>
+      <main className="px-4 pb-4">{children}</main>
+    </div>
   );
 };

@@ -2,8 +2,8 @@ import { Dashboard } from '../../components/Dashboard';
 
 export const HomePage: React.FC = () => {
   return (
-    <main>
-      <Dashboard />
-    </main>
+    <Dashboard title="Home">
+      <div>Home page content</div>
+    </Dashboard>
   );
 };

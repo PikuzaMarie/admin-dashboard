@@ -5,3 +5,10 @@ export interface SidebarItem {
   Icon: IconType;
   href: string;
 }
+
+export interface StatCardType {
+  name: string;
+  Icon: IconType;
+  color: string;
+  value: string;
+}

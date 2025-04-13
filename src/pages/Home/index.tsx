@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 
 import { Dashboard } from '../../components/Dashboard';
+import { SalesOverviewChart } from '../../components/Dashboard/SalesOverviewChart';
 import { StatCard } from '../../components/Dashboard/StatCard';
 import { STAT_CARDS } from '../../constants';
 
@@ -17,6 +18,9 @@ export const HomePage: React.FC = () => {
           <StatCard key={card.name} {...card} />
         ))}
       </motion.div>
+      <div className="grid-col-2 grid gap-8 lg:grid-cols-2">
+        <SalesOverviewChart />
+      </div>
     </Dashboard>
   );
 };

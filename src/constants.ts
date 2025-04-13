@@ -22,6 +22,14 @@ export const ROUTES = {
   settings: '/settings',
 };
 
+export const COLORS: { [key: string]: string } = {
+  blue: '#6366F1',
+  purple: '#8e51ff',
+  pink: '#EC4899',
+  green: '#10B981',
+  yellow: '#F59E0B',
+};
+
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   { name: 'Home', Icon: FiHome, href: ROUTES.home },
   { name: 'Products', Icon: FiShoppingBag, href: ROUTES.products },
@@ -33,18 +41,18 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
 ];
 
 export const STAT_CARDS: StatCardType[] = [
-  { name: 'Total Sales', Icon: FiZap, value: '$12,245', color: '#6366F1' },
-  { name: 'New Users', Icon: FiUsers, value: '1,234', color: '#8e51ff' },
+  { name: 'Total Sales', Icon: FiZap, value: '$12,245', color: COLORS.blue },
+  { name: 'New Users', Icon: FiUsers, value: '1,234', color: COLORS.purple },
   {
     name: 'Total Products',
     Icon: FiShoppingBag,
     value: '567',
-    color: '#EC4899',
+    color: COLORS.pink,
   },
   {
     name: 'Conversion Rate',
     Icon: FiBarChart2,
     value: '12.5%',
-    color: '#10B981',
+    color: COLORS.green,
   },
 ];

@@ -1,4 +1,5 @@
 import { AccountToggle } from './AccountToggle';
+import { Plan } from './Plan';
 import { RouteSelect } from './RouteSelect';
 import { Search } from './Search';
 
@@ -10,6 +11,7 @@ export const Sidebar: React.FC = () => {
         <Search />
         <RouteSelect />
       </div>
+      <Plan />
     </div>
   );
 };

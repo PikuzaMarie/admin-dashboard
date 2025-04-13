@@ -7,6 +7,7 @@ export const RouteSelect: React.FC = () => {
     <div className="space-y-1">
       {SIDEBAR_ITEMS.map(item => (
         <NavLink
+          key={item.name}
           to={item.href}
           className={({ isActive }) =>
             `flex w-full items-center justify-start gap-2 rounded px-2 py-1.5 text-sm transition-[box-shadow,_background-color,_color] ${

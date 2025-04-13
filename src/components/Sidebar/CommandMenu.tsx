@@ -1,6 +1,8 @@
 import { Command } from 'cmdk';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { FiEye, FiLink, FiLogOut, FiPhone, FiPlus } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+
+import { SIDEBAR_ITEMS } from '../../constants';
 
 interface CommandMenuProps {
   open: boolean;
@@ -47,54 +49,21 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ open, setOpen }) => {
             <span className="text-violet-500">"{inputValue}"</span>
           </Command.Empty>
 
-          <CustomCommandGroup heading="Team">
-            <CustomCommandItem>
-              <FiPlus /> Invite Member
-            </CustomCommandItem>
-            <CustomCommandItem>
-              <FiEye />
-              See org chart
-            </CustomCommandItem>
-          </CustomCommandGroup>
-
-          <CustomCommandGroup heading="Integrations">
-            <CustomCommandItem>
-              <FiLink />
-              Link Services
-            </CustomCommandItem>
-            <CustomCommandItem>
-              <FiPhone />
-              Contact Support
-            </CustomCommandItem>
-          </CustomCommandGroup>
-
-          <CustomCommandItem>
-            <FiLogOut />
-            Sign Out
-          </CustomCommandItem>
+          <Command.Group
+            heading="Pages"
+            className="mb-3 text-sm text-stone-400"
+          >
+            {SIDEBAR_ITEMS.map(({ Icon, name, href }) => (
+              <Link to={href}>
+                <Command.Item className="flex cursor-pointer items-center gap-2 rounded p-2 text-sm text-stone-950 transition-colors hover:bg-stone-200">
+                  <Icon />
+                  {name}
+                </Command.Item>
+              </Link>
+            ))}
+          </Command.Group>
         </Command.List>
       </div>
     </Command.Dialog>
-  );
-};
-
-const CustomCommandItem: React.FC<{
-  children: React.ReactNode;
-}> = ({ children }) => {
-  return (
-    <Command.Item className="flex cursor-pointer items-center gap-2 rounded p-2 text-sm text-stone-950 transition-colors hover:bg-stone-200">
-      {children}
-    </Command.Item>
-  );
-};
-
-const CustomCommandGroup: React.FC<{
-  heading?: React.ReactNode;
-  children: React.ReactNode;
-}> = ({ heading, children }) => {
-  return (
-    <Command.Group heading={heading} className="mb-3 text-sm text-stone-400">
-      {children}
-    </Command.Group>
   );
 };

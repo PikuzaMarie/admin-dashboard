@@ -1,6 +1,11 @@
+import { useState } from 'react';
 import { FiCommand, FiSearch } from 'react-icons/fi';
 
+import { CommandMenu } from './CommandMenu';
+
 export const Search: React.FC = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <div className="realtive mb-4 flex items-center rounded bg-stone-200 px-2 py-1.5 text-sm">
@@ -13,6 +18,7 @@ export const Search: React.FC = () => {
         <span className="relative top-1/2 right-1.5 flex items-center gap-0.5 rounded bg-stone-50 p-1 text-xs shadow">
           <FiCommand />K
         </span>
+        <CommandMenu open={open} setOpen={setOpen} />
       </div>
     </>
   );

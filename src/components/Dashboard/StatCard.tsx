@@ -11,7 +11,7 @@ export const StatCard: React.FC<StatCardType> = ({
 }) => {
   return (
     <motion.div
-      className="overflow-hidden rounded-xl border border-stone-200 bg-stone-100 shadow-sm backdrop-blur-sm"
+      className="overflow-hidden rounded-xl border border-stone-200 bg-transparent shadow-sm backdrop-blur-sm"
       whileHover={{ y: -5, boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}
     >
       <div className="px-4 py-5 sm:p-6">

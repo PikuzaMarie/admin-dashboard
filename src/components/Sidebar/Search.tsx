@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 import { FiCommand, FiSearch } from 'react-icons/fi';
 
 import { CommandMenu } from './CommandMenu';
@@ -6,9 +6,11 @@ import { CommandMenu } from './CommandMenu';
 interface SearchProps {
   placeholder?: string;
   isMenuSearch?: boolean;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
 export const Search: React.FC<SearchProps> = ({
+  onChange,
   placeholder = 'Search',
   isMenuSearch = false,
 }) => {
@@ -22,6 +24,7 @@ export const Search: React.FC<SearchProps> = ({
           type="text"
           placeholder={placeholder}
           className="w-full bg-transparent placeholder:text-stone-400 focus:outline-none"
+          onChange={onChange}
         />
         {isMenuSearch && (
           <span className="relative top-1/2 right-1.5 flex items-center gap-0.5 rounded bg-stone-50 p-1 text-xs shadow">

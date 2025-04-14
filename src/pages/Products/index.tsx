@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useState } from 'react';
 import { FiDelete, FiEdit3, FiStar } from 'react-icons/fi';
 import { useLoaderData } from 'react-router-dom';
 
@@ -9,7 +9,14 @@ import { COLORS } from '../../constants';
 import { Product } from '../../types';
 
 export const ProductsPage: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState('');
   const data: Product[] = useLoaderData();
+
+  const filteredData = data.filter(
+    product =>
+      product.title.toLocaleLowerCase().includes(searchTerm) ||
+      product.description.toLocaleLowerCase().includes(searchTerm),
+  );
 
   return (
     <Dashboard title="Products">
@@ -18,7 +25,10 @@ export const ProductsPage: React.FC = () => {
           All Products List
         </h2>
         <div className="relative">
-          <Search placeholder="Search products..." />
+          <Search
+            placeholder="Search products..."
+            onChange={e => setSearchTerm(e.target.value)}
+          />
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -52,7 +62,7 @@ export const ProductsPage: React.FC = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-stone-200">
-            {data.map(product => (
+            {filteredData.map(product => (
               <motion.tr
                 key={product.id}
                 initial={{ opacity: 0 }}
@@ -110,6 +120,14 @@ export const ProductsPage: React.FC = () => {
               </motion.tr>
             ))}
           </tbody>
+          {filteredData.length === 0 && (
+            <td colSpan={8}>
+              <p className="py-2 text-stone-800">
+                No results found for{' '}
+                <span className="text-violet-500">"{searchTerm}"</span>
+              </p>
+            </td>
+          )}
         </table>
       </div>
     </Dashboard>

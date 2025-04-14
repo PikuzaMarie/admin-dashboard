@@ -8,7 +8,7 @@ export const Sidebar: React.FC = () => {
     <div>
       <div className="sticky top-4 h-[calc(100vh-32px-48px)] overflow-y-scroll">
         <AccountToggle />
-        <Search />
+        <Search isMenuSearch={true} />
         <RouteSelect />
       </div>
       <Plan />

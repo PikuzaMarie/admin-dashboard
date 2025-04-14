@@ -13,6 +13,7 @@ import {
 import { SidebarItem, StatCardType } from './types';
 
 export const ROUTES = {
+  auth: '/auth',
   home: '/',
   products: '/products',
   users: '/users',

@@ -12,3 +12,16 @@ export interface StatCardType {
   color: string;
   value: string;
 }
+
+export interface Product {
+  id: string;
+  title: string;
+  price: number;
+  description: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+  category: "women's clothing" | "men's clothing" | 'electronics' | 'jewelery';
+  image: string;
+}

@@ -3,15 +3,17 @@ import { useNavigate } from 'react-router-dom';
 
 import { AuthForm } from '../../components/AuthForm';
 import { ROUTES } from '../../constants';
+import { authenticateUser } from '../../features/auth/authSlice';
 import {
   selectAllUsers,
   selectError,
   selectStatus,
 } from '../../features/users/usersSlice';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthData } from '../../types';
 
 export const AuthenticationPage: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState<string | undefined>('');
 
@@ -21,18 +23,8 @@ export const AuthenticationPage: React.FC = () => {
 
   async function handleAuthenticate(authData: AuthData) {
     try {
-      const response = await fetch('https://dummyjson.com/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(authData),
-      });
+      await dispatch(authenticateUser(authData)).unwrap();
 
-      if (!response.ok) {
-        throw new Error('Failed to authenticate user');
-      }
-      // TODO: accept and manage token
       navigate(ROUTES.home);
     } catch (error) {
       const message =

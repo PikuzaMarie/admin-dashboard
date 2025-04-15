@@ -32,3 +32,8 @@ export interface User {
   password: string;
   email: string;
 }
+
+export interface AuthData {
+  username: User['username'];
+  password: User['password'];
+}

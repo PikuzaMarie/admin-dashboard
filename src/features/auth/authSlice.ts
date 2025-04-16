@@ -3,23 +3,45 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createAppAsyncThunk } from '../../app/withTypes';
 import { RootState } from '../../store';
 import { AuthData, User } from '../../types';
+import { getToken } from './helper/getToken';
 
-export interface AuthState {
-  username: User['username'] | null;
-  token: string | null;
-  expiresIn: number;
+interface AuthState {
+  userId: User['id'];
+  status: 'idle' | 'pending' | 'authorized' | 'rejected';
+  error: string | undefined;
 }
 
 interface AuthResponse {
-  username: User['username'];
-  token: string;
+  id: User['id'];
+  accessToken: string;
 }
 
 const initialState: AuthState = {
-  username: null,
-  token: null,
-  expiresIn: 0,
+  userId: 0,
+  status: 'idle',
+  error: undefined,
 };
+
+export const fetchCurrentUser = createAppAsyncThunk(
+  'auth/fetchCurrentUser',
+  async () => {
+    const token = getToken();
+
+    const response = await fetch('https://dummyjson.com/auth/me', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch user');
+    }
+
+    const user: User = await response.json();
+    return user;
+  },
+);
 
 export const authenticateUser = createAppAsyncThunk(
   'auth/authenticateUser',
@@ -38,6 +60,8 @@ export const authenticateUser = createAppAsyncThunk(
 
     const data: AuthResponse = await response.json();
 
+    localStorage.setItem('token', data.accessToken);
+
     const now = new Date();
     const expiresIn = now.setTime(now.getHours() + 1);
 
@@ -54,9 +78,25 @@ const authSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(authenticateUser.fulfilled, (_, action) => {
-      return action.payload;
-    });
+    builder
+      .addCase(authenticateUser.fulfilled, (state, action) => {
+        state.userId = action.payload.id;
+        state.status = 'authorized';
+        state.error = undefined;
+      })
+      .addCase(fetchCurrentUser.pending, state => {
+        state.status = 'pending';
+        state.error = undefined;
+      })
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.userId = action.payload.id;
+        state.status = 'authorized';
+        state.error = undefined;
+      })
+      .addCase(fetchCurrentUser.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.error.message;
+      });
   },
 });
 
@@ -64,5 +104,6 @@ export const { userLoggedOut } = authSlice.actions;
 
 export default authSlice.reducer;
 
-export const selectCurrentUsername = (state: RootState) => state.auth.username;
-export const selectToken = (state: RootState) => state.auth.token;
+export const selectCurrentUserId = (state: RootState) => state.auth.userId;
+export const selectAuthStatus = (state: RootState) => state.auth.status;
+export const selectAuthError = (state: RootState) => state.auth.error;

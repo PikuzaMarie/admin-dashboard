@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 
 import { AuthData, User } from '../types';
+import { AccountToggle } from './Sidebar/AccountToggle';
 
 interface LoginPageFormFileds extends HTMLFormControlsCollection {
   username: HTMLSelectElement;
@@ -17,8 +18,7 @@ interface AuthFormProps {
 }
 
 export const AuthForm: React.FC<AuthFormProps> = ({ users, authenticate }) => {
-  const [selectedUserId, setSelectedUserId] = useState(0);
-
+  const [selectedUserId, setSelectedUserId] = useState(1);
   const user = users.find(user => user.id === selectedUserId);
 
   function handleSubmit(e: FormEvent<LoginPageFormElements>) {
@@ -37,23 +37,27 @@ export const AuthForm: React.FC<AuthFormProps> = ({ users, authenticate }) => {
     }
   }
 
+  function switchToNextUser() {
+    setSelectedUserId(prevId => (prevId === users.length ? 1 : prevId + 1));
+  }
+
+  function switchToPrevUser() {
+    setSelectedUserId(prevId => (prevId === 1 ? users.length : prevId - 1));
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <select
-          id="username"
-          name="username"
-          onChange={e => setSelectedUserId(Number(e.target.value))}
-        >
-          <option value="">select account</option>
-          {users.map(user => (
-            <option key={user.id} value={user.id}>
-              {user.username}
-            </option>
-          ))}
-        </select>
         {selectedUserId !== 0 && user && (
-          <button>Continue as {user.username}</button>
+          <>
+            <AccountToggle
+              email={user.email}
+              name={user.username}
+              handleChevronUpClick={switchToNextUser}
+              handleChevronDownCLick={switchToPrevUser}
+            />
+            <button>Continue as {user.username}</button>
+          </>
         )}
       </form>
     </>

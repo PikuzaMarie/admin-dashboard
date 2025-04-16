@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 
 import { AuthData, User } from '../types';
+import { Loader } from './Loader';
 import { AccountToggle } from './Sidebar/AccountToggle';
 
 interface LoginPageFormFileds extends HTMLFormControlsCollection {
@@ -47,6 +48,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({ users, authenticate }) => {
     setSelectedUserId(prevId => (prevId === 1 ? users.length : prevId - 1));
   }
 
+  if (isLoading) {
+    return <Loader message="Authentication in progress..." />;
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -65,7 +70,6 @@ export const AuthForm: React.FC<AuthFormProps> = ({ users, authenticate }) => {
             </button>
           </div>
         )}
-        {isLoading && <p>Authorizing in process. Please, wait a few seconds</p>}
       </form>
     </>
   );

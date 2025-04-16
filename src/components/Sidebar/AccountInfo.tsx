@@ -10,6 +10,7 @@ import {
 } from '../../features/auth/authSlice';
 import { selectUserById } from '../../features/users/usersSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { Loader } from '../Loader';
 import { AccountToggle } from './AccountToggle';
 
 export const AccountInfo: React.FC = () => {
@@ -29,7 +30,7 @@ export const AccountInfo: React.FC = () => {
   }
 
   if (authStatus === 'pending') {
-    return <p>Loading current user...</p>;
+    return <Loader message="Loading current user..." />;
   }
 
   if (authStatus === 'authorized' && user) {

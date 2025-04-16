@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AuthForm } from '../../components/AuthForm';
+import { Loader } from '../../components/Loader';
 import { ROUTES } from '../../constants';
 import { authenticateUser } from '../../features/auth/authSlice';
 import {
@@ -39,7 +40,7 @@ export const AuthenticationPage: React.FC = () => {
 
   switch (fetchingStatus) {
     case 'loading': {
-      content = <p>Loading users...</p>;
+      content = <Loader message="Loading users..." />;
       break;
     }
     case 'fulfilled': {

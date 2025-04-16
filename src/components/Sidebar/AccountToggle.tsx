@@ -23,7 +23,9 @@ export const AccountToggle: React.FC<AccountToggleProps> = ({
         />
         <div className="text-start">
           <span className="block text-sm font-semibold">{name}</span>
-          <span className="block text-xs text-stone-500">{email}</span>
+          <span className="block text-xs text-stone-500">
+            {email.length > 23 ? email.substring(0, 23).concat('...') : email}
+          </span>
         </div>
         {handleChevronUpClick && handleChevronDownCLick && (
           <>

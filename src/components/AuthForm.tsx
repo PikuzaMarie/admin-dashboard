@@ -18,6 +18,7 @@ interface AuthFormProps {
 }
 
 export const AuthForm: React.FC<AuthFormProps> = ({ users, authenticate }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(1);
   const user = users.find(user => user.id === selectedUserId);
 
@@ -25,6 +26,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ users, authenticate }) => {
     e.preventDefault();
 
     if (user) {
+      setIsLoading(true);
       const username = user.username;
       const password = user.password;
 
@@ -48,7 +50,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ users, authenticate }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {selectedUserId !== 0 && user && (
+        {selectedUserId !== 0 && user && !isLoading && (
           <>
             <AccountToggle
               email={user.email}
@@ -59,6 +61,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ users, authenticate }) => {
             <button>Continue as {user.username}</button>
           </>
         )}
+        {isLoading && <p>Authorizing in process. Please, wait a few seconds</p>}
       </form>
     </>
   );

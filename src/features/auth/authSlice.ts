@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createAppAsyncThunk } from '../../app/withTypes';
 import { RootState } from '../../store';
 import { AuthData, User } from '../../types';
-import { getToken } from './helper/getToken';
+import { getToken, removeToken, setToken } from './helper';
 
 interface AuthState {
   userId: User['id'];
@@ -60,7 +60,7 @@ export const authenticateUser = createAppAsyncThunk(
 
     const data: AuthResponse = await response.json();
 
-    localStorage.setItem('token', data.accessToken);
+    setToken(data.accessToken);
 
     const now = new Date();
     const expiresIn = now.setTime(now.getHours() + 1);

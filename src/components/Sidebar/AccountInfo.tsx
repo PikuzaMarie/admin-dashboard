@@ -7,7 +7,9 @@ import {
   selectAuthError,
   selectAuthStatus,
   selectCurrentUserId,
+  userLoggedOut,
 } from '../../features/auth/authSlice';
+import { getToken, getTokenDuration } from '../../features/auth/helper';
 import { selectUserById } from '../../features/users/usersSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Loader } from '../Loader';
@@ -22,6 +24,20 @@ export const AccountInfo: React.FC = () => {
 
   const userId = useAppSelector(selectCurrentUserId);
   const user = useAppSelector(state => selectUserById(state, userId));
+  const token = getToken();
+
+  useEffect(() => {
+    if (!token) {
+      dispatch(userLoggedOut());
+    }
+
+    const tokenDuration = getTokenDuration();
+
+    setTimeout(() => {
+      dispatch(userLoggedOut());
+    }, tokenDuration);
+  }, [token, dispatch]);
+
   const authStatus = useAppSelector(selectAuthStatus);
   const authError = useAppSelector(selectAuthError);
 

@@ -3,12 +3,18 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createAppAsyncThunk } from '../../app/withTypes';
 import { RootState } from '../../store';
 import { AuthData, User } from '../../types';
-import { getToken, removeToken, setToken } from './helper';
+import {
+  getToken,
+  removeToken,
+  setToken,
+  setTokenExpirationInHours,
+} from './helper';
 
 interface AuthState {
   userId: User['id'];
   status: 'idle' | 'pending' | 'authorized' | 'rejected' | 'loggedOut';
   error: string | undefined;
+  expiresIn: number;
 }
 
 interface AuthResponse {
@@ -20,6 +26,7 @@ const initialState: AuthState = {
   userId: 0,
   status: 'idle',
   error: undefined,
+  expiresIn: 0,
 };
 
 export const fetchCurrentUser = createAppAsyncThunk(
@@ -61,11 +68,9 @@ export const authenticateUser = createAppAsyncThunk(
     const data: AuthResponse = await response.json();
 
     setToken(data.accessToken);
+    setTokenExpirationInHours(1);
 
-    const now = new Date();
-    const expiresIn = now.setTime(now.getHours() + 1);
-
-    return { ...data, expiresIn };
+    return data;
   },
 );
 

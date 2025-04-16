@@ -7,7 +7,7 @@ import { getToken, removeToken, setToken } from './helper';
 
 interface AuthState {
   userId: User['id'];
-  status: 'idle' | 'pending' | 'authorized' | 'rejected';
+  status: 'idle' | 'pending' | 'authorized' | 'rejected' | 'loggedOut';
   error: string | undefined;
 }
 
@@ -75,7 +75,7 @@ const authSlice = createSlice({
   reducers: {
     userLoggedOut() {
       removeToken();
-      return initialState;
+      return { ...initialState, status: 'loggedOut' };
     },
   },
   extraReducers(builder) {

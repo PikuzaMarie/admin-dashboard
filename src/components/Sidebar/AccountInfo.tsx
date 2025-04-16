@@ -24,7 +24,7 @@ export const AccountInfo: React.FC = () => {
   const authStatus = useAppSelector(selectAuthStatus);
   const authError = useAppSelector(selectAuthError);
 
-  if (authError || authStatus === 'rejected') {
+  if (authError || authStatus === 'rejected' || authStatus === 'loggedOut') {
     return <Navigate to={ROUTES.auth} replace />;
   }
 

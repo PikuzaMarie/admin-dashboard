@@ -56,10 +56,18 @@ export const AuthenticationPage: React.FC = () => {
 
   return (
     <main>
-      <h2>Welcome back</h2>
-      <p>Select an account to continue with</p>
-      {content}
-      {error && <p>Error occured: {error}</p>}
+      <section className="relative mt-[calc(20vh)] flex flex-col gap-6 justify-self-center rounded-xl border-1 border-stone-100 bg-stone-100 p-20">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-center text-4xl font-semibold text-stone-950">
+            Welcome back
+          </h2>
+          <p className="text-md text-stone-800">
+            Select an account to continue with
+          </p>
+        </div>
+        {content}
+        {error && <p>Error occured: {error}</p>}
+      </section>
     </main>
   );
 };

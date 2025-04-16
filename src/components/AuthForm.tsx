@@ -51,15 +51,19 @@ export const AuthForm: React.FC<AuthFormProps> = ({ users, authenticate }) => {
     <>
       <form onSubmit={handleSubmit}>
         {selectedUserId !== 0 && user && !isLoading && (
-          <>
-            <AccountToggle
-              email={user.email}
-              name={user.username}
-              handleChevronUpClick={switchToNextUser}
-              handleChevronDownCLick={switchToPrevUser}
-            />
-            <button>Continue as {user.username}</button>
-          </>
+          <div className="flex flex-col gap-4">
+            <div className="scale-125">
+              <AccountToggle
+                email={user.email}
+                name={user.username}
+                handleChevronUpClick={switchToNextUser}
+                handleChevronDownCLick={switchToPrevUser}
+              />
+            </div>
+            <button className="w-full rounded-md bg-stone-800 p-2 text-center text-stone-50 hover:bg-purple-700">
+              Continue as {user.username}
+            </button>
+          </div>
         )}
         {isLoading && <p>Authorizing in process. Please, wait a few seconds</p>}
       </form>

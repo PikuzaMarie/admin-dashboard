@@ -74,6 +74,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     userLoggedOut() {
+      removeToken();
       return initialState;
     },
   },

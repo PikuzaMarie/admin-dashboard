@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { SIDEBAR_ITEMS } from '../../constants';
+import { LogOut } from './LogOut';
 
 interface CommandMenuProps {
   open: boolean;
@@ -62,6 +63,9 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ open, setOpen }) => {
               </Link>
             ))}
           </Command.Group>
+          <Command.Item className="p-2">
+            <LogOut />
+          </Command.Item>
         </Command.List>
       </div>
     </Command.Dialog>

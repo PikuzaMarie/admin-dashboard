@@ -1,5 +1,5 @@
 import { AccountInfo } from './AccountInfo';
-import { Plan } from './Plan';
+import { LogOut } from './LogOut';
 import { RouteSelect } from './RouteSelect';
 import { Search } from './Search';
 
@@ -11,7 +11,7 @@ export const Sidebar: React.FC = () => {
         <Search isMenuSearch={true} />
         <RouteSelect />
       </div>
-      <Plan />
+      <LogOut />
     </div>
   );
 };

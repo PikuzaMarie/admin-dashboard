@@ -2,9 +2,8 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { FiEye, FiStar } from 'react-icons/fi';
 
-import { COLORS, PRODUCTS_TABLE_HEADERS } from '../constants';
+import { CATEGORY_COLORS, COLORS, PRODUCTS_TABLE_HEADERS } from '../constants';
 import { Product } from '../types';
-import { getCategoryColor } from '../utils/getCategoryColorName';
 
 interface ProductsTableProps {
   productsData: Product[];
@@ -56,9 +55,9 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
             <td className="max-w-[200px] overflow-hidden px-2 py-2 text-xs font-medium text-ellipsis whitespace-nowrap text-stone-800">
               {product.brand}
             </td>
-            <td className="px-2 py-2 text-xs whitespace-nowrap text-stone-800">
+            <td className="px-2 py-2 text-xs whitespace-nowrap">
               <span
-                className={`inline-flex rounded-full px-2 text-xs leading-5 font-semibold bg-${getCategoryColor(product.category)}-100 text-${getCategoryColor(product.category)}-800`}
+                className={`inline-flex rounded-full px-2 text-xs leading-5 ${CATEGORY_COLORS[product.category]}`}
               >
                 {product.category}
               </span>

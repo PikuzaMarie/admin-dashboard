@@ -10,7 +10,7 @@ import {
   FiZap,
 } from 'react-icons/fi';
 
-import { Product, SidebarItem, StatCardType } from './types';
+import { Category, Product, SidebarItem, StatCardType } from './types';
 
 export const SERVER_URL = 'https://dummyjson.com';
 export const USERS_ENDPOINT = '/users';
@@ -124,4 +124,31 @@ export const PRODUCTS_TABLE_HEADERS: { [key in keyof Product]: string } = {
   price: 'Price',
   stock: 'Stock',
   rating: 'Rating',
+};
+
+export const CATEGORY_COLORS: Record<Category, string> = {
+  beauty: 'bg-pink-100 text-pink-800',
+  fragrances: 'bg-violet-100 text-violet-800',
+  furniture: 'bg-teal-100 text-teal-800',
+  groceries: 'bg-green-100 text-green-800',
+  'home-decoration': 'bg-yellow-100 text-yellow-800',
+  'kitchen-accessories': 'bg-orange-100 text-orange-800',
+  laptops: 'bg-blue-100 text-blue-800',
+  mensShirts: 'bg-cyan-100 text-cyan-800',
+  mensShoes: 'bg-gray-100 text-gray-800',
+  mensWatches: 'bg-indigo-100 text-indigo-800',
+  'mobile-accessories': 'bg-teal-100 text-teal-800',
+  motorcycle: 'bg-red-100 text-red-800',
+  skinCare: 'bg-lime-100 text-lime-800',
+  smartphones: 'bg-slate-100 text-slate-800',
+  'sports-accessories': 'bg-emerald-100 text-emerald-800',
+  sunglasses: 'bg-rose-100 text-rose-800',
+  tablets: 'bg-violet-100 text-violet-800',
+  tops: 'bg-fuchsia-100 text-fuchsia-800',
+  vehicle: 'bg-stone-100 text-stone-800',
+  'womens-bags': 'bg-pink-100 text-pink-800',
+  'womens-dresses': 'bg-yellow-100 text-yellow-800',
+  'womens-jewellery': 'bg-amber-100 text-amber-800',
+  'womens-shoes': 'bg-rose-100 text-rose-800',
+  'womens-watches': 'bg-emerald-100 text-emerald-800',
 };

@@ -17,6 +17,20 @@ export const USERS_ENDPOINT = '/users';
 export const USERS_LIMIT = 5;
 export const AUTH_ENDPOINT = '/auth/me';
 export const USER_LOGIN_ENDPOINT = '/user/login';
+export const PRODUCTS_ENDPOINT = '/auth/products';
+
+export const PRODUCTS_FIELDS = Object.keys({
+  id: 0,
+  sku: '',
+  title: '',
+  description: '',
+  brand: '',
+  category: 'beauty',
+  price: 0,
+  stock: 0,
+  rating: 0,
+  thumbnail: '',
+}) as (keyof Product)[];
 
 export const ROUTES = {
   auth: '/auth',

@@ -10,7 +10,7 @@ import {
   FiZap,
 } from 'react-icons/fi';
 
-import { SidebarItem, StatCardType } from './types';
+import { Product, SidebarItem, StatCardType } from './types';
 
 export const SERVER_URL = 'https://dummyjson.com';
 export const USERS_ENDPOINT = '/users';
@@ -111,3 +111,16 @@ export const SALES_CHANNEL_DATA: {
   { name: 'Marketplace', value: 29800, color: COLORS.pink },
   { name: 'Social Media', value: 18700, color: COLORS.green },
 ];
+
+export const PRODUCTS_TABLE_HEADERS: { [key in keyof Product]: string } = {
+  id: 'Id',
+  sku: 'SKU',
+  thumbnail: 'Image',
+  title: 'Title',
+  description: 'Description',
+  brand: 'Brand',
+  category: 'Category',
+  price: 'Price',
+  stock: 'Stock',
+  rating: 'Rating',
+};

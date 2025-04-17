@@ -125,6 +125,7 @@ export const PRODUCTS_TABLE_HEADERS: { [key in keyof Product]: string } = {
   stock: 'Stock',
   rating: 'Rating',
 };
+export const ITEMS_PER_PAGE_OPTIONS = [5, 10, 15];
 
 export const CATEGORY_COLORS: Record<Category, string> = {
   beauty: 'bg-pink-100 text-pink-800',

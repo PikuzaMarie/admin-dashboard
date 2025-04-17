@@ -1,14 +1,14 @@
 import { AccountInfo } from './AccountInfo';
 import { LogOut } from './LogOut';
+import { MenuSearch } from './MenuSearch';
 import { RouteSelect } from './RouteSelect';
-import { Search } from './Search';
 
 export const Sidebar: React.FC = () => {
   return (
     <div>
       <div className="sticky top-4 h-[calc(100vh-32px-48px)] overflow-y-scroll">
         <AccountInfo />
-        <Search isMenuSearch={true} />
+        <MenuSearch />
         <RouteSelect />
       </div>
       <LogOut />

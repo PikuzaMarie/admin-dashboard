@@ -1,9 +1,8 @@
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler } from 'react';
 import { FiCommand, FiSearch } from 'react-icons/fi';
 
-import { CommandMenu } from './CommandMenu';
-
 interface SearchProps {
+  value?: string;
   placeholder?: string;
   isMenuSearch?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -12,16 +11,16 @@ interface SearchProps {
 export const Search: React.FC<SearchProps> = ({
   onChange,
   placeholder = 'Search',
+  value,
   isMenuSearch = false,
 }) => {
-  const [open, setOpen] = useState(false);
-
   return (
     <>
       <div className="realtive mb-4 flex items-center rounded bg-stone-200 px-2 py-1.5 text-sm">
         <FiSearch className="mr-2" />
         <input
           type="text"
+          value={value}
           placeholder={placeholder}
           className="w-full bg-transparent placeholder:text-stone-400 focus:outline-none"
           onChange={onChange}
@@ -31,7 +30,6 @@ export const Search: React.FC<SearchProps> = ({
             <FiCommand />K
           </span>
         )}
-        <CommandMenu open={open} setOpen={setOpen} />
       </div>
     </>
   );

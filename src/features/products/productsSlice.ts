@@ -75,7 +75,7 @@ const productsSlice = createSlice({
 
 export default productsSlice.reducer;
 
-export const selectProducts = (state: RootState) => state.products;
+export const selectProducts = (state: RootState) => state.products.products;
 export const selectProductsStatus = (state: RootState) => state.products.status;
 export const selectProductsTotal = (state: RootState) => state.products.total;
 export const selectProductsError = (state: RootState) => state.products.error;

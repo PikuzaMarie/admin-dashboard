@@ -6,6 +6,7 @@ import { AuthData, User } from '../../types';
 import {
   getToken,
   removeToken,
+  removeTokenExpirationDate,
   setToken,
   setTokenExpirationInHours,
 } from './helper';
@@ -80,6 +81,7 @@ const authSlice = createSlice({
   reducers: {
     userLoggedOut() {
       removeToken();
+      removeTokenExpirationDate();
       return { ...initialState, status: 'loggedOut' };
     },
   },

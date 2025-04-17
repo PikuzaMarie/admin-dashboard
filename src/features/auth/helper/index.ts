@@ -31,3 +31,7 @@ export function getTokenDuration() {
 
   return duration;
 }
+
+export function removeTokenExpirationDate() {
+  localStorage.removeItem('expiresIn');
+}

@@ -9,6 +9,7 @@ import {
 } from '../../constants';
 import { RootState } from '../../store';
 import { Product } from '../../types';
+import { validateItemsPerPage, validatePage } from '../../utils';
 import { getToken } from '../auth/helper';
 
 interface ProductsState {
@@ -32,11 +33,39 @@ const initialState: ProductsState = {
 
 export const fetchProducts = createAppAsyncThunk(
   'products/fetchProducts',
-  async () => {
+  async (
+    {
+      currentPage,
+      itemsPerPage,
+    }: {
+      currentPage: number;
+      itemsPerPage: number;
+    },
+    { getState },
+  ) => {
     const token = getToken();
 
+    const validatedItemsPerPage = validateItemsPerPage(itemsPerPage);
+    const state = getState() as RootState;
+    const productsTotal = state.products.total;
+
+    let validatedCurrentPage;
+
+    if (productsTotal > 0) {
+      const totalPages = Math.ceil(
+        productsTotal / Number(validatedItemsPerPage),
+      );
+      validatedCurrentPage = validatePage(currentPage, totalPages);
+    } else {
+      validatedCurrentPage = 1;
+    }
+
+    const skip = (validatedCurrentPage - 1) * validatedItemsPerPage;
+
     const response = await fetch(
-      SERVER_URL + PRODUCTS_ENDPOINT + `?select=${PRODUCTS_FIELDS.join(',')}`,
+      SERVER_URL +
+        PRODUCTS_ENDPOINT +
+        `?limit=${validatedItemsPerPage}&skip=${skip}&select=${PRODUCTS_FIELDS.join(',')}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

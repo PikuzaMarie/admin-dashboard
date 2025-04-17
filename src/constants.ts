@@ -12,6 +12,12 @@ import {
 
 import { SidebarItem, StatCardType } from './types';
 
+export const SERVER_URL = 'https://dummyjson.com';
+export const USERS_ENDPOINT = '/users';
+export const USERS_LIMIT = 5;
+export const AUTH_ENDPOINT = '/auth/me';
+export const USER_LOGIN_ENDPOINT = '/user/login';
+
 export const ROUTES = {
   auth: '/auth',
   home: '/',

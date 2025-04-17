@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { createAppAsyncThunk } from '../../app/withTypes';
+import { SERVER_URL, USERS_ENDPOINT, USERS_LIMIT } from '../../constants';
 import { RootState } from '../../store';
 import { User } from '../../types';
 
@@ -19,7 +20,9 @@ const initialState: {
 };
 
 export const fetchUsers = createAppAsyncThunk('users/fetchUsers', async () => {
-  const response = await fetch('https://dummyjson.com/users?limit=5');
+  const response = await fetch(
+    SERVER_URL + USERS_ENDPOINT + `?limit=${USERS_LIMIT}`,
+  );
 
   if (!response.ok) {
     throw new Error('Network response was not ok');

@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { createAppAsyncThunk } from '../../app/withTypes';
+import {
+  AUTH_ENDPOINT,
+  SERVER_URL,
+  USER_LOGIN_ENDPOINT,
+} from '../../constants';
 import { RootState } from '../../store';
 import { AuthData, User } from '../../types';
 import {
@@ -35,7 +40,7 @@ export const fetchCurrentUser = createAppAsyncThunk(
   async () => {
     const token = getToken();
 
-    const response = await fetch('https://dummyjson.com/auth/me', {
+    const response = await fetch(SERVER_URL + AUTH_ENDPOINT, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -54,7 +59,7 @@ export const fetchCurrentUser = createAppAsyncThunk(
 export const authenticateUser = createAppAsyncThunk(
   'auth/authenticateUser',
   async (authData: AuthData) => {
-    const response = await fetch('https://dummyjson.com/user/login', {
+    const response = await fetch(SERVER_URL + USER_LOGIN_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

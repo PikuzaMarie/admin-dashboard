@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { Dashboard } from '../../components/Dashboard';
 import { Loader } from '../../components/Loader';
+import { Pagination } from '../../components/Pagination';
 import { ProductsSearch } from '../../components/ProductsSearch';
 import { ProductsTable } from '../../components/ProductsTable';
 import {
@@ -15,10 +17,21 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 
 export const ProductsPage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const [searchParams] = useSearchParams();
+
+  const itemsPerPage = Number(searchParams.get('itemsPerPage')) || 10;
+  const currentPage = Number(searchParams.get('page')) || 1;
+
+  const fetchProductsForPage = useCallback(
+    (currentPage: number, itemsPerPage: number) => {
+      dispatch(fetchProducts({ currentPage, itemsPerPage }));
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    fetchProductsForPage(currentPage, itemsPerPage);
+  }, [dispatch, currentPage, itemsPerPage, fetchProductsForPage]);
 
   const fetchedProducts = useAppSelector(selectProducts);
 
@@ -42,6 +55,10 @@ export const ProductsPage: React.FC = () => {
         <>
           <div className="overflow-x-auto">
             <ProductsTable productsData={fetchedProducts} />
+            <Pagination
+              total={productsTotal}
+              onPageChange={fetchProductsForPage}
+            />
           </div>
         </>
       );

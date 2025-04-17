@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import React from 'react';
 import { FiEye, FiStar } from 'react-icons/fi';
 
@@ -31,12 +30,7 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
       </thead>
       <tbody className="divide-y divide-stone-200">
         {productsData.map(product => (
-          <motion.tr
-            key={product.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
+          <tr key={product.id}>
             <td className="px-2 py-2 text-xs font-medium whitespace-nowrap text-stone-800">
               {product.id}
             </td>
@@ -88,7 +82,7 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
                 </p>
               </div>
             </td>
-          </motion.tr>
+          </tr>
         ))}
       </tbody>
     </table>

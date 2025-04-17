@@ -2,7 +2,6 @@ import { ChangeEventHandler } from 'react';
 import { FiCommand, FiSearch } from 'react-icons/fi';
 
 interface SearchProps {
-  value?: string;
   placeholder?: string;
   isMenuSearch?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -11,7 +10,6 @@ interface SearchProps {
 export const Search: React.FC<SearchProps> = ({
   onChange,
   placeholder = 'Search',
-  value,
   isMenuSearch = false,
 }) => {
   return (
@@ -20,9 +18,9 @@ export const Search: React.FC<SearchProps> = ({
         <FiSearch className="mr-2" />
         <input
           type="text"
-          value={value}
           placeholder={placeholder}
           className="w-full bg-transparent placeholder:text-stone-400 focus:outline-none"
+          maxLength={30}
           onChange={onChange}
         />
         {isMenuSearch && (

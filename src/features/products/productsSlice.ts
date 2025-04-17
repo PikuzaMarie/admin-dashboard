@@ -4,6 +4,7 @@ import { createAppAsyncThunk } from '../../app/withTypes';
 import {
   PRODUCTS_ENDPOINT,
   PRODUCTS_FIELDS,
+  SEARCH_ENDPOINT,
   SERVER_URL,
 } from '../../constants';
 import { RootState } from '../../store';
@@ -13,7 +14,7 @@ import { getToken } from '../auth/helper';
 interface ProductsState {
   products: Product[];
   total: number;
-  status: 'idle' | 'loading' | 'fulfilled' | 'rejected';
+  status: 'idle' | 'loading' | 'fulfilled' | 'rejected' | 'searching';
   error: string | undefined;
 }
 
@@ -25,7 +26,7 @@ interface ProductsResponse {
 const initialState: ProductsState = {
   products: [],
   total: 0,
-  status: 'loading',
+  status: 'idle',
   error: undefined,
 };
 
@@ -52,6 +53,32 @@ export const fetchProducts = createAppAsyncThunk(
   },
 );
 
+export const searchProducts = createAppAsyncThunk(
+  'products/searchProducts',
+  async (searchTerm: string) => {
+    const token = getToken();
+
+    const response = await fetch(
+      SERVER_URL +
+        PRODUCTS_ENDPOINT +
+        SEARCH_ENDPOINT +
+        `?q=${searchTerm}&select=${PRODUCTS_FIELDS.join(',')}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error('Could not fetch products for provided query');
+    }
+    const resData: ProductsResponse = await response.json();
+
+    return resData;
+  },
+);
+
 const productsSlice = createSlice({
   name: 'products',
   initialState,
@@ -67,6 +94,18 @@ const productsSlice = createSlice({
         state.status = 'fulfilled';
       })
       .addCase(fetchProducts.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.error.message;
+      })
+      .addCase(searchProducts.pending, state => {
+        state.status = 'searching';
+      })
+      .addCase(searchProducts.fulfilled, (state, action) => {
+        state.products = action.payload.products;
+        state.total = action.payload.total;
+        state.status = 'fulfilled';
+      })
+      .addCase(searchProducts.rejected, (state, action) => {
         state.status = 'rejected';
         state.error = action.error.message;
       });

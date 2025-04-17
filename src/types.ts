@@ -13,17 +13,43 @@ export interface StatCardType {
   value: string;
 }
 
+export type Category =
+  | 'beauty'
+  | 'fragrances'
+  | 'furniture'
+  | 'groceries'
+  | 'homeDecoration'
+  | 'kitchenAccessories'
+  | 'laptops'
+  | 'mensShirts'
+  | 'mensShoes'
+  | 'mensWatches'
+  | 'mobileAccessories'
+  | 'motorcycle'
+  | 'skinCare'
+  | 'smartphones'
+  | 'sportsAccessories'
+  | 'sunglasses'
+  | 'tablets'
+  | 'tops'
+  | 'vehicle'
+  | 'womensBags'
+  | 'womensDresses'
+  | 'womensJewellery'
+  | 'womensShoes'
+  | 'womensWatches';
+
 export interface Product {
-  id: string;
+  id: number;
+  sku: string;
   title: string;
-  price: number;
   description: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-  category: "women's clothing" | "men's clothing" | 'electronics' | 'jewelery';
-  image: string;
+  brand: string;
+  category: Category;
+  price: number;
+  stock: number;
+  rating: number;
+  thumbnail: string;
 }
 
 export interface User {

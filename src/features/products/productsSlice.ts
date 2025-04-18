@@ -65,6 +65,11 @@ export const fetchProducts = createAppAsyncThunk(
 
     const skip = (validatedCurrentPage - 1) * validatedItemsPerPage;
 
+    const { validatedSortBy, validatedOrder } = validateSortParams(
+      sortBy,
+      order,
+    );
+
     let url: URL;
     switch (type) {
       case 'search': {
@@ -73,6 +78,8 @@ export const fetchProducts = createAppAsyncThunk(
           endpoint: PRODUCTS_ENDPOINT + SEARCH_ENDPOINT,
           params: {
             q: searchTerm!,
+            sortBy: validatedSortBy,
+            order: validatedOrder,
             limit: validatedItemsPerPage,
             skip,
             select: PRODUCTS_FIELDS.join(','),
@@ -81,11 +88,6 @@ export const fetchProducts = createAppAsyncThunk(
         break;
       }
       case 'sort': {
-        const { validatedSortBy, validatedOrder } = validateSortParams(
-          sortBy,
-          order,
-        );
-
         url = buildURL({
           serverURL: SERVER_URL,
           endpoint: PRODUCTS_ENDPOINT,
@@ -104,6 +106,8 @@ export const fetchProducts = createAppAsyncThunk(
           serverURL: SERVER_URL,
           endpoint: PRODUCTS_ENDPOINT,
           params: {
+            sortBy: 'id',
+            order: 'asc',
             limit: validatedItemsPerPage,
             skip,
             select: PRODUCTS_FIELDS.join(','),

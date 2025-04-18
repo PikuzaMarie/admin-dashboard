@@ -8,10 +8,12 @@ import {
 import { Search } from './Search';
 
 interface ProductsSearch {
+  searchTerm: string;
   onSearchChange: (value: string) => void;
 }
 
 export const ProductsSearch: React.FC<ProductsSearch> = ({
+  searchTerm,
   onSearchChange,
 }) => {
   const productsStatus = useSelector(selectProductsStatus);
@@ -26,7 +28,7 @@ export const ProductsSearch: React.FC<ProductsSearch> = ({
       {productsStatus === 'fulfilled' && resultsCount === 0 && (
         <p className="text-sm text-stone-800">
           No results found for
-          <span className="text-violet-500">your query</span>
+          <span className="text-violet-500"> "{searchTerm}"</span>
         </p>
       )}
     </div>

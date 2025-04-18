@@ -6,6 +6,7 @@ import { Loader } from '../../components/Loader';
 import { Pagination } from '../../components/Pagination';
 import { ProductsSearch } from '../../components/ProductsSearch';
 import { ProductsTable } from '../../components/ProductsTable';
+import { ITEMS_PER_PAGE_OPTIONS } from '../../constants';
 import {
   fetchProducts,
   selectProducts,
@@ -20,7 +21,8 @@ export const ProductsPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
 
-  const itemsPerPage = Number(searchParams.get('itemsPerPage')) || 10;
+  const itemsPerPage =
+    Number(searchParams.get('itemsPerPage')) || ITEMS_PER_PAGE_OPTIONS[0];
   const currentPage = Number(searchParams.get('page')) || 1;
 
   const [searchTerm, setSearchTerm] = useState('');

@@ -112,7 +112,8 @@ export const ProductsPage: React.FC = () => {
     <Dashboard title="Products">
       <div className="mb-6 flex items-start justify-between">
         <h2 className="text-md font-semibold text-stone-800">
-          All Products List ({productsTotal})
+          All Products List
+          <span className="text-violet-500"> ({productsTotal})</span>
         </h2>
         <ProductsSearch
           onSearchChange={handleSearchChange}

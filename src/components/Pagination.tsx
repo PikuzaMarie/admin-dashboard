@@ -7,13 +7,9 @@ import { validateItemsPerPage, validatePage } from '../utils';
 
 interface PaginationProps {
   total: number;
-  onPageChange: (page: number, itemsPerPage: number) => void;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
-  total,
-  onPageChange,
-}) => {
+export const Pagination: React.FC<PaginationProps> = ({ total }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const itemsPerPage = validateItemsPerPage(
@@ -39,8 +35,6 @@ export const Pagination: React.FC<PaginationProps> = ({
       ...Object.fromEntries(searchParams),
       page: newPage.toString(),
     });
-
-    onPageChange(newPage, itemsPerPage);
   }
 
   function handleItemsPerPageChange(newValue: number) {
@@ -51,8 +45,6 @@ export const Pagination: React.FC<PaginationProps> = ({
       page: '1',
       itemsPerPage: newItemsPerPage.toString(),
     });
-
-    onPageChange(1, newItemsPerPage);
   }
 
   return (

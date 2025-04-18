@@ -72,10 +72,7 @@ export const ProductsPage: React.FC = () => {
         <>
           <div className="overflow-x-auto">
             <ProductsTable productsData={fetchedProducts} />
-            <Pagination
-              total={productsTotal}
-              onPageChange={fetchProductsForPage}
-            />
+            <Pagination total={productsTotal} />
           </div>
         </>
       );

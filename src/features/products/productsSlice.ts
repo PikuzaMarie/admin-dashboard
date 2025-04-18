@@ -9,7 +9,11 @@ import {
 } from '../../constants';
 import { RootState } from '../../store';
 import { Product } from '../../types';
-import { buildURL, validatePaginationParams } from '../../utils';
+import {
+  buildURL,
+  validatePaginationParams,
+  validateSortParams,
+} from '../../utils';
 import { getToken } from '../auth/helper';
 
 interface ProductsState {
@@ -39,11 +43,15 @@ export const fetchProducts = createAppAsyncThunk(
       itemsPerPage,
       type,
       searchTerm,
+      sortBy,
+      order,
     }: {
       currentPage: number;
       itemsPerPage: number;
-      type?: 'search' | 'plain';
+      type?: 'search' | 'plain' | 'sort';
       searchTerm?: string;
+      sortBy?: string;
+      order?: string;
     },
     { getState },
   ) => {
@@ -65,6 +73,25 @@ export const fetchProducts = createAppAsyncThunk(
           endpoint: PRODUCTS_ENDPOINT + SEARCH_ENDPOINT,
           params: {
             q: searchTerm!,
+            limit: validatedItemsPerPage,
+            skip,
+            select: PRODUCTS_FIELDS.join(','),
+          },
+        });
+        break;
+      }
+      case 'sort': {
+        const { validatedSortBy, validatedOrder } = validateSortParams(
+          sortBy,
+          order,
+        );
+
+        url = buildURL({
+          serverURL: SERVER_URL,
+          endpoint: PRODUCTS_ENDPOINT,
+          params: {
+            sortBy: validatedSortBy,
+            order: validatedOrder,
             limit: validatedItemsPerPage,
             skip,
             select: PRODUCTS_FIELDS.join(','),

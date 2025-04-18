@@ -32,14 +32,25 @@ export const ProductsPage: React.FC = () => {
     setSearchTerm(value);
   }, []);
 
+  const sortBy = searchParams.get('sortBy') || undefined;
+  const order = searchParams.get('order') || undefined;
+
   const fetchProductsForPage = useCallback(
-    (currentPage: number, itemsPerPage: number, searchTerm?: string) => {
+    (
+      currentPage: number,
+      itemsPerPage: number,
+      searchTerm?: string,
+      sortBy?: string,
+      order?: string,
+    ) => {
       dispatch(
         fetchProducts({
           currentPage,
           itemsPerPage,
-          type: searchTerm ? 'search' : 'plain',
+          type: searchTerm ? 'search' : sortBy ? 'sort' : 'plain',
           searchTerm,
+          sortBy,
+          order,
         }),
       );
     },
@@ -47,13 +58,21 @@ export const ProductsPage: React.FC = () => {
   );
 
   useEffect(() => {
-    fetchProductsForPage(currentPage, itemsPerPage, debouncedSearchTerm);
+    fetchProductsForPage(
+      currentPage,
+      itemsPerPage,
+      debouncedSearchTerm,
+      sortBy,
+      order,
+    );
   }, [
     dispatch,
     currentPage,
     itemsPerPage,
     fetchProductsForPage,
     debouncedSearchTerm,
+    sortBy,
+    order,
   ]);
 
   const fetchedProducts = useAppSelector(selectProducts);

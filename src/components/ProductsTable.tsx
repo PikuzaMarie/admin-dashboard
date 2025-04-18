@@ -3,6 +3,7 @@ import { FiEye, FiStar } from 'react-icons/fi';
 
 import { CATEGORY_COLORS, COLORS, PRODUCTS_TABLE_HEADERS } from '../constants';
 import { Product, ValidSortFields } from '../types';
+import { formatCurrency } from '../utils';
 import { SortControl } from './SortControl';
 
 interface ProductsTableProps {
@@ -65,7 +66,7 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
               </span>
             </td>
             <td className="px-2 py-2 text-xs whitespace-nowrap text-stone-800">
-              {product.price}
+              {formatCurrency(product.price)}
             </td>
             <td className="px-2 py-2 text-xs whitespace-nowrap text-stone-800">
               {product.stock}

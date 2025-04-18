@@ -2,7 +2,8 @@ import React from 'react';
 import { FiEye, FiStar } from 'react-icons/fi';
 
 import { CATEGORY_COLORS, COLORS, PRODUCTS_TABLE_HEADERS } from '../constants';
-import { Product } from '../types';
+import { Product, ValidSortFields } from '../types';
+import { SortControl } from './SortControl';
 
 interface ProductsTableProps {
   productsData: Product[];
@@ -18,9 +19,16 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
           {Object.values(PRODUCTS_TABLE_HEADERS).map(header => (
             <th
               key={header}
-              className="px-2 py-2 text-left text-xs font-medium tracking-wider text-stone-500 uppercase"
+              className="cursor-pointer px-2 py-2 text-left text-xs font-medium tracking-wider text-stone-500 uppercase"
             >
-              {header}
+              <div className="flex">
+                <span>{header}</span>
+                {header !== 'Image' && (
+                  <SortControl
+                    field={header.toLocaleLowerCase() as ValidSortFields}
+                  />
+                )}
+              </div>
             </th>
           ))}
           <th className="px-2 py-2 text-left text-xs font-medium tracking-wider text-stone-500 uppercase">

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Dashboard } from '../../components/Dashboard';
@@ -14,6 +14,7 @@ import {
   selectProductsTotal,
 } from '../../features/products/productsSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export const ProductsPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -22,16 +23,36 @@ export const ProductsPage: React.FC = () => {
   const itemsPerPage = Number(searchParams.get('itemsPerPage')) || 10;
   const currentPage = Number(searchParams.get('page')) || 1;
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce({ value: searchTerm, delay: 1000 });
+
+  const handleSearchChange = useCallback((value: string) => {
+    setSearchTerm(value);
+  }, []);
+
   const fetchProductsForPage = useCallback(
-    (currentPage: number, itemsPerPage: number) => {
-      dispatch(fetchProducts({ currentPage, itemsPerPage }));
+    (currentPage: number, itemsPerPage: number, searchTerm?: string) => {
+      dispatch(
+        fetchProducts({
+          currentPage,
+          itemsPerPage,
+          type: searchTerm ? 'search' : 'plain',
+          searchTerm,
+        }),
+      );
     },
     [dispatch],
   );
 
   useEffect(() => {
-    fetchProductsForPage(currentPage, itemsPerPage);
-  }, [dispatch, currentPage, itemsPerPage, fetchProductsForPage]);
+    fetchProductsForPage(currentPage, itemsPerPage, debouncedSearchTerm);
+  }, [
+    dispatch,
+    currentPage,
+    itemsPerPage,
+    fetchProductsForPage,
+    debouncedSearchTerm,
+  ]);
 
   const fetchedProducts = useAppSelector(selectProducts);
 
@@ -44,10 +65,6 @@ export const ProductsPage: React.FC = () => {
   switch (productsStatus) {
     case 'loading': {
       content = <Loader message="Loading products..." />;
-      break;
-    }
-    case 'searching': {
-      content = <Loader message="Searching for products..." />;
       break;
     }
     case 'fulfilled': {
@@ -79,7 +96,7 @@ export const ProductsPage: React.FC = () => {
         <h2 className="text-md font-semibold text-stone-800">
           All Products List ({productsTotal})
         </h2>
-        <ProductsSearch />
+        <ProductsSearch onSearchChange={handleSearchChange} />
       </div>
       {content}
     </Dashboard>

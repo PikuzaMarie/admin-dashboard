@@ -55,6 +55,7 @@ export const Pagination: React.FC<PaginationProps> = ({ total }) => {
           id="itemsPerPage"
           value={itemsPerPage}
           onChange={e => handleItemsPerPageChange(Number(e.target.value))}
+          className="rounded-md bg-stone-100 hover:bg-stone-200"
         >
           {ITEMS_PER_PAGE_OPTIONS.map(option => (
             <option key={option} value={option}>
@@ -69,6 +70,7 @@ export const Pagination: React.FC<PaginationProps> = ({ total }) => {
           id="page"
           value={currentPage}
           onChange={e => handlePageChange(Number(e.target.value))}
+          className="rounded-md bg-stone-100 hover:bg-stone-200"
         >
           {pageOptions.map(option => (
             <option key={option} value={option}>
@@ -76,18 +78,22 @@ export const Pagination: React.FC<PaginationProps> = ({ total }) => {
             </option>
           ))}
         </select>
-        <span>of {totalPages} pages</span>
+        <p>
+          of <span className="text-violet-500">{totalPages}</span> pages
+        </p>
       </div>
       <div className="flex gap-2">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
+          className="cursor-pointer rounded-xl bg-stone-100 p-1.5 hover:bg-stone-200 disabled:cursor-not-allowed disabled:opacity-50 hover:disabled:bg-stone-100"
         >
           <FiChevronLeft />
         </button>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
+          className="cursor-pointer rounded-xl bg-stone-100 p-1.5 hover:bg-stone-200 disabled:cursor-not-allowed disabled:opacity-50 hover:disabled:bg-stone-100"
         >
           <FiChevronRight />
         </button>

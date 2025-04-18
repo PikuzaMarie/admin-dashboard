@@ -29,9 +29,9 @@ export const SalesOverviewChart: React.FC = () => {
         <Line
           type="monotone"
           dataKey="sales"
-          stroke={COLORS.purple}
+          stroke={COLORS.violet}
           strokeWidth={3}
-          dot={{ fill: COLORS.purple, strokeWidth: 2, r: 6 }}
+          dot={{ fill: COLORS.violet, strokeWidth: 2, r: 6 }}
           activeDot={{ r: 8, strokeWidth: 2 }}
         />
       </LineChart>

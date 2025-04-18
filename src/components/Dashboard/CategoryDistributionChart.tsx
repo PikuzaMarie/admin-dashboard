@@ -1,7 +1,7 @@
 import React from 'react';
 import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
 
-import { CATEGORY_DATA } from '../../constants';
+import { CATEGORY_DATA, COLORS } from '../../constants';
 import { ChartContainer } from './ChartContainer';
 
 export const CategoryDistributionChart: React.FC = () => {
@@ -14,7 +14,7 @@ export const CategoryDistributionChart: React.FC = () => {
           cy={'50%'}
           labelLine={false}
           outerRadius={80}
-          fill="#8884d8"
+          fill={COLORS.violet}
           dataKey="value"
           label={({ name, percent }) =>
             `${name} ${(percent * 100).toFixed(0)}%`

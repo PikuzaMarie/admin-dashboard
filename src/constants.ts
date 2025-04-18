@@ -43,11 +43,11 @@ export const ROUTES = {
 };
 
 export const COLORS: { [key: string]: string } = {
-  blue: '#6366F1',
-  purple: '#8e51ff',
-  pink: '#EC4899',
-  green: '#10B981',
-  yellow: '#F59E0B',
+  blue: 'oklch(0.623 0.214 259.815)',
+  violet: 'oklch(0.606 0.25 292.717)',
+  pink: 'oklch(0.656 0.241 354.308)',
+  green: 'oklch(0.723 0.219 149.579)',
+  yellow: 'oklch(0.795 0.184 86.047)',
 };
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
@@ -101,7 +101,7 @@ export const SALES_DATA: { name: string; sales: number }[] = [
 
 export const CATEGORY_DATA: { name: string; value: number; color: string }[] = [
   { name: 'Electronics', value: 4500, color: COLORS.blue },
-  { name: 'Clothing', value: 3200, color: COLORS.purple },
+  { name: 'Clothing', value: 3200, color: COLORS.violet },
   { name: 'Home & Garden', value: 2800, color: COLORS.pink },
   { name: 'Books', value: 2100, color: COLORS.green },
   { name: 'Sports & Outdoors', value: 1900, color: COLORS.yellow },
@@ -113,7 +113,7 @@ export const SALES_CHANNEL_DATA: {
   color: string;
 }[] = [
   { name: 'Website', value: 45600, color: COLORS.blue },
-  { name: 'Mobile App', value: 38200, color: COLORS.purple },
+  { name: 'Mobile App', value: 38200, color: COLORS.violet },
   { name: 'Marketplace', value: 29800, color: COLORS.pink },
   { name: 'Social Media', value: 18700, color: COLORS.green },
 ];

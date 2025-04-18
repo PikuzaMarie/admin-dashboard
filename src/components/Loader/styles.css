@@ -2,7 +2,7 @@
 .loader {
   width: 44.8px;
   height: 44.8px;
-  color: #554cb5;
+  color: oklch(0.606 0.25 292.717);
   position: relative;
   background: radial-gradient(11.2px, currentColor 94%, #0000);
 }

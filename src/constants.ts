@@ -1,5 +1,4 @@
 import {
-  FiBarChart2,
   FiDollarSign,
   FiHome,
   FiSettings,
@@ -7,7 +6,6 @@ import {
   FiShoppingCart,
   FiTrendingUp,
   FiUsers,
-  FiZap,
 } from 'react-icons/fi';
 
 import { Category, Product, SidebarItem, StatCardType } from './types';
@@ -62,20 +60,27 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   { name: 'Settings', Icon: FiSettings, href: ROUTES.settings },
 ];
 
-export const STAT_CARDS: StatCardType[] = [
-  { name: 'Total Sales', Icon: FiZap, value: '$12,245', color: COLORS.blue },
-  { name: 'New Users', Icon: FiUsers, value: '1,234', color: COLORS.purple },
+export const STAT_CARDS_DATA: StatCardType[] = [
   {
-    name: 'Total Products',
-    Icon: FiShoppingBag,
-    value: '567',
-    color: COLORS.pink,
+    title: 'Gross Revenue',
+    value: 120054.24,
+    pillText: '2.75%',
+    trend: 'up',
+    period: 'From Jan 1st - Jul 31st',
   },
   {
-    name: 'Conversion Rate',
-    Icon: FiBarChart2,
-    value: '12.5%',
-    color: COLORS.green,
+    title: 'Avg Order',
+    value: 27.97,
+    pillText: '1.01%',
+    trend: 'down',
+    period: 'From Jan 1st - Jul 31st',
+  },
+  {
+    title: 'Trailing Year',
+    value: 278054.24,
+    pillText: '60.75%',
+    trend: 'up',
+    period: 'Previous 365 days',
   },
 ];
 

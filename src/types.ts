@@ -7,10 +7,11 @@ export interface SidebarItem {
 }
 
 export interface StatCardType {
-  name: string;
-  Icon: IconType;
-  color: string;
-  value: string;
+  title: string;
+  value: number;
+  trend: 'up' | 'down';
+  pillText: string;
+  period: string;
 }
 
 export type Category =

@@ -93,7 +93,7 @@ export const ProductsPage: React.FC = () => {
         <>
           <div className="overflow-x-auto">
             <ProductsTable productsData={fetchedProducts} />
-            <Pagination total={productsTotal} />
+            {fetchedProducts.length > 0 && <Pagination total={productsTotal} />}
           </div>
         </>
       );
@@ -114,7 +114,10 @@ export const ProductsPage: React.FC = () => {
         <h2 className="text-md font-semibold text-stone-800">
           All Products List ({productsTotal})
         </h2>
-        <ProductsSearch onSearchChange={handleSearchChange} />
+        <ProductsSearch
+          onSearchChange={handleSearchChange}
+          searchTerm={searchTerm}
+        />
       </div>
       {content}
     </Dashboard>

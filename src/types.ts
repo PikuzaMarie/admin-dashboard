@@ -63,3 +63,11 @@ export interface AuthData {
   username: User['username'];
   password: User['password'];
 }
+
+export type ValidSortFields = keyof Omit<Product, 'image'>;
+export type ValidOrders = 'asc' | 'desc';
+
+export interface SortParams {
+  sortBy: ValidSortFields;
+  order: ValidOrders;
+}

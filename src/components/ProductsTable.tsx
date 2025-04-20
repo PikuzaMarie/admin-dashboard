@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiEye, FiStar } from 'react-icons/fi';
 
-import { CATEGORY_COLORS, COLORS, PRODUCTS_TABLE_HEADERS } from '../constants';
+import { CATEGORY_COLORS, PRODUCTS_TABLE_HEADERS } from '../constants';
 import { Product, ValidSortFields } from '../types';
 import { formatCurrency } from '../utils';
 import { SortControl } from './SortControl';
@@ -73,7 +73,7 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
             </td>
             <td className="px-2 py-1 text-xs text-stone-800">
               <div className="flex items-center gap-1">
-                <FiStar fill={COLORS.yellow} stroke={COLORS.yellow} />
+                <FiStar className="fill-yellow-500 text-yellow-500" />
                 {product.rating}
               </div>
             </td>
@@ -81,10 +81,10 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
             <td className="px-2 py-1 text-xs text-stone-800">
               <div className="flex items-center gap-0.5">
                 <button
-                  className="mr-2 rounded-sm p-1 hover:bg-pink-100"
+                  className="mr-2 rounded-sm p-1 hover:bg-violet-100"
                   aria-describedby="hint-id"
                 >
-                  <FiEye size={18} color={COLORS.purple} />
+                  <FiEye size={18} className="text-violet-500" />
                 </button>
                 <p id="hint-id" className="textstone-800 text-xs">
                   See details

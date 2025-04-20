@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { createAppAsyncThunk } from '../../app/withTypes';
 import {
@@ -11,7 +11,7 @@ import { RootState } from '../../store';
 import { Product } from '../../types';
 import {
   buildURL,
-  validatePaginationParams,
+  validateItemsPerPage,
   validateSortParams,
 } from '../../utils';
 import { getToken } from '../auth/helper';
@@ -21,6 +21,7 @@ interface ProductsState {
   total: number;
   status: 'idle' | 'loading' | 'fulfilled' | 'rejected';
   error: string | undefined;
+  currentPage: number;
 }
 
 interface ProductsResponse {
@@ -33,37 +34,31 @@ const initialState: ProductsState = {
   total: 0,
   status: 'idle',
   error: undefined,
+  currentPage: 1,
 };
 
 export const fetchProducts = createAppAsyncThunk(
   'products/fetchProducts',
-  async (
-    {
-      currentPage,
-      itemsPerPage,
-      type,
-      searchTerm,
-      sortBy,
-      order,
-    }: {
-      currentPage: number;
-      itemsPerPage: number;
-      type?: 'search' | 'plain' | 'sort';
-      searchTerm?: string;
-      sortBy?: string;
-      order?: string;
-    },
-    { getState },
-  ) => {
+  async ({
+    currentPage,
+    itemsPerPage,
+    type,
+    searchTerm,
+    sortBy,
+    order,
+  }: {
+    currentPage: number;
+    itemsPerPage: number;
+    type?: 'search' | 'plain' | 'sort';
+    searchTerm?: string;
+    sortBy?: string;
+    order?: string;
+  }) => {
     const token = getToken();
 
-    const state = getState() as RootState;
-    const productsTotal = state.products.total;
+    const validatedItemsPerPage = validateItemsPerPage(itemsPerPage);
 
-    const { validatedItemsPerPage, validatedCurrentPage } =
-      validatePaginationParams(currentPage, itemsPerPage, productsTotal);
-
-    const skip = (validatedCurrentPage - 1) * validatedItemsPerPage;
+    const skip = (currentPage - 1) * validatedItemsPerPage;
 
     const { validatedSortBy, validatedOrder } = validateSortParams(
       sortBy,
@@ -134,7 +129,11 @@ export const fetchProducts = createAppAsyncThunk(
 const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    currentPageChanged(state, action: PayloadAction<number>) {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchProducts.pending, state => {
@@ -154,7 +153,11 @@ const productsSlice = createSlice({
 
 export default productsSlice.reducer;
 
+export const { currentPageChanged } = productsSlice.actions;
+
 export const selectProducts = (state: RootState) => state.products.products;
 export const selectProductsStatus = (state: RootState) => state.products.status;
 export const selectProductsTotal = (state: RootState) => state.products.total;
 export const selectProductsError = (state: RootState) => state.products.error;
+export const selectCurrentPage = (state: RootState) =>
+  state.products.currentPage;

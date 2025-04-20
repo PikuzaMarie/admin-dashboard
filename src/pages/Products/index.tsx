@@ -9,6 +9,7 @@ import { ProductsTable } from '../../components/ProductsTable';
 import { ITEMS_PER_PAGE_OPTIONS } from '../../constants';
 import {
   fetchProducts,
+  selectCurrentPage,
   selectProducts,
   selectProductsError,
   selectProductsStatus,
@@ -23,7 +24,7 @@ export const ProductsPage: React.FC = () => {
 
   const itemsPerPage =
     Number(searchParams.get('itemsPerPage')) || ITEMS_PER_PAGE_OPTIONS[0];
-  const currentPage = Number(searchParams.get('page')) || 1;
+  const currentPage = useAppSelector(selectCurrentPage);
 
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce({ value: searchTerm, delay: 1000 });

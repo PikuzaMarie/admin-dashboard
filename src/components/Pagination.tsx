@@ -3,6 +3,11 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { useSearchParams } from 'react-router-dom';
 
 import { ITEMS_PER_PAGE_OPTIONS } from '../constants';
+import {
+  currentPageChanged,
+  selectCurrentPage,
+} from '../features/products/productsSlice';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { validateItemsPerPage, validatePage } from '../utils';
 
 interface PaginationProps {
@@ -10,18 +15,16 @@ interface PaginationProps {
 }
 
 export const Pagination: React.FC<PaginationProps> = ({ total }) => {
+  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const currentPage = useAppSelector(selectCurrentPage);
 
   const itemsPerPage = validateItemsPerPage(
     Number(searchParams.get('itemsPerPage')),
   );
 
   const totalPages = Math.ceil(total / Number(itemsPerPage));
-
-  const currentPage = validatePage(
-    Number(searchParams.get('page')),
-    totalPages,
-  );
 
   const pageOptions = Array.from(
     { length: totalPages },
@@ -31,10 +34,7 @@ export const Pagination: React.FC<PaginationProps> = ({ total }) => {
   function handlePageChange(newValue: number) {
     const newPage = validatePage(newValue, totalPages);
 
-    setSearchParams({
-      ...Object.fromEntries(searchParams),
-      page: newPage.toString(),
-    });
+    dispatch(currentPageChanged(newPage));
   }
 
   function handleItemsPerPageChange(newValue: number) {
@@ -42,7 +42,6 @@ export const Pagination: React.FC<PaginationProps> = ({ total }) => {
 
     setSearchParams({
       ...Object.fromEntries(searchParams),
-      page: '1',
       itemsPerPage: newItemsPerPage.toString(),
     });
   }

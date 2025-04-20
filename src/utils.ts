@@ -39,24 +39,6 @@ export function validateSortParams(
   return { validatedSortBy, validatedOrder };
 }
 
-export function validatePaginationParams(
-  currentPage: number,
-  itemsPerPage: number,
-  itemsTotal: number,
-) {
-  const validatedItemsPerPage = validateItemsPerPage(itemsPerPage);
-  let validatedCurrentPage;
-
-  if (itemsTotal > 0) {
-    const totalPages = Math.ceil(itemsTotal / Number(validatedItemsPerPage));
-    validatedCurrentPage = validatePage(currentPage, totalPages);
-  } else {
-    validatedCurrentPage = 1;
-  }
-
-  return { validatedItemsPerPage, validatedCurrentPage };
-}
-
 interface BuildURLParams {
   endpoint: string;
   serverURL: string;

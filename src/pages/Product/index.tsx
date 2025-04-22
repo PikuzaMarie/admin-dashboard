@@ -29,8 +29,10 @@ export const ProductPage: React.FC = () => {
   const productStatus = useAppSelector(selectProductsStatus);
 
   useEffect(() => {
-    dispatch(fetchCurrentProduct({ productId: Number(productId) }));
-  }, [productId, dispatch]);
+    if (Object.keys(product).length === 0 || +productId! !== product.id) {
+      dispatch(fetchCurrentProduct({ productId: Number(productId) }));
+    }
+  }, [productId, dispatch, product]);
 
   let content: React.ReactNode;
 
@@ -50,9 +52,11 @@ export const ProductPage: React.FC = () => {
               </button>
             </Link>
             <div className="flex gap-4">
-              <button className="flex cursor-pointer items-center gap-1">
-                <FiEdit /> Edit
-              </button>
+              <Link to="edit">
+                <button className="flex cursor-pointer items-center gap-1">
+                  <FiEdit /> Edit
+                </button>
+              </Link>
               <button className="flex cursor-pointer items-center gap-1">
                 <FiPlus /> Create new
               </button>
@@ -120,7 +124,7 @@ export const ProductPage: React.FC = () => {
             <section>
               <h4>Reviews: </h4>
               {product.reviews.map(review => (
-                <article>
+                <article key={review.reviewerName + review.comment}>
                   <div>
                     <div>
                       <p>{review.reviewerName}</p>

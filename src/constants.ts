@@ -17,6 +17,7 @@ export const AUTH_ENDPOINT = '/auth/me';
 export const USER_LOGIN_ENDPOINT = '/user/login';
 export const PRODUCTS_ENDPOINT = '/auth/products';
 export const SEARCH_ENDPOINT = '/search';
+export const ADD_ENDPOINT = '/add';
 
 export const PRODUCTS_FIELDS = Object.keys({
   id: 0,

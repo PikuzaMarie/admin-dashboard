@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { createAppAsyncThunk } from '../../app/withTypes';
 import {
+  ADD_ENDPOINT,
+  ITEMS_PER_PAGE_OPTIONS,
   PRODUCTS_ENDPOINT,
   PRODUCTS_FIELDS,
   SEARCH_ENDPOINT,
@@ -40,6 +42,36 @@ const initialState: ProductsState = {
   error: undefined,
   currentPage: 1,
 };
+
+export const createProduct = createAppAsyncThunk(
+  'product/createProduct',
+  async (productData: Partial<Product>) => {
+    const token = getToken();
+
+    const url = buildURL({
+      serverURL: SERVER_URL,
+      endpoint: PRODUCTS_ENDPOINT + ADD_ENDPOINT,
+      params: {},
+    });
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to create new product');
+    }
+
+    const resData: Product = await response.json();
+
+    return resData;
+  },
+);
 
 export const updateProduct = createAppAsyncThunk(
   'products/updateProduct',
@@ -210,7 +242,7 @@ const productsSlice = createSlice({
         state.products = action.payload.products;
         state.total = action.payload.total;
         state.status = 'fulfilled';
-        state.currentPage = action.payload.skip / action.payload.limit + 1;
+        state.currentPage = action.payload.skip / ITEMS_PER_PAGE_OPTIONS[0] + 1;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'rejected';
@@ -238,6 +270,10 @@ const productsSlice = createSlice({
       .addCase(updateProduct.rejected, (state, action) => {
         state.status = 'rejected';
         state.error = action.error.message;
+      })
+      .addCase(createProduct.fulfilled, state => {
+        state.status = 'fulfilled';
+        state.total += 1;
       });
   },
 });

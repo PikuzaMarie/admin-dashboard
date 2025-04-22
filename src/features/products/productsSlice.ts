@@ -8,7 +8,7 @@ import {
   SERVER_URL,
 } from '../../constants';
 import { RootState } from '../../store';
-import { Product } from '../../types';
+import { ExtendedProduct, Product } from '../../types';
 import {
   buildURL,
   validateItemsPerPage,
@@ -18,7 +18,7 @@ import { getToken } from '../auth/helper';
 
 interface ProductsState {
   products: Product[];
-  currentProduct: Product;
+  currentProduct: ExtendedProduct;
   total: number;
   status: 'idle' | 'loading' | 'fulfilled' | 'rejected';
   error: string | undefined;
@@ -34,7 +34,7 @@ interface ProductsResponse {
 
 const initialState: ProductsState = {
   products: [],
-  currentProduct: {} as Product,
+  currentProduct: {} as ExtendedProduct,
   total: 0,
   status: 'idle',
   error: undefined,

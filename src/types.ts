@@ -53,6 +53,23 @@ export interface Product {
   thumbnail: string;
 }
 
+interface ProductReview {
+  rating: number;
+  comment: string;
+  date: string;
+  reviewerName: string;
+  reviewerEmail: string;
+}
+
+export interface ExtendedProduct extends Product {
+  images: string[];
+  reviews: ProductReview[];
+  warrantyInformation: string;
+  shippingInformation: string;
+  availabilityStatus: 'In stock' | 'Low Stock';
+  returnPolicy: string;
+}
+
 export interface User {
   id: number;
   username: string;

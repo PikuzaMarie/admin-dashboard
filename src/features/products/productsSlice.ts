@@ -18,6 +18,7 @@ import { getToken } from '../auth/helper';
 
 interface ProductsState {
   products: Product[];
+  currentProduct: Product;
   total: number;
   status: 'idle' | 'loading' | 'fulfilled' | 'rejected';
   error: string | undefined;
@@ -33,11 +34,39 @@ interface ProductsResponse {
 
 const initialState: ProductsState = {
   products: [],
+  currentProduct: {} as Product,
   total: 0,
   status: 'idle',
   error: undefined,
   currentPage: 1,
 };
+
+export const fetchCurrentProduct = createAppAsyncThunk(
+  'products/fetchCurrentProduct',
+  async ({ productId }: { productId: Product['id'] }) => {
+    const token = getToken();
+
+    const url = buildURL({
+      serverURL: SERVER_URL,
+      endpoint: PRODUCTS_ENDPOINT + '/' + productId,
+      params: {},
+    });
+
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch product with id: ${productId}`);
+    }
+
+    const resData = await response.json();
+
+    return resData;
+  },
+);
 
 export const fetchProducts = createAppAsyncThunk(
   'products/fetchProducts',
@@ -150,6 +179,18 @@ const productsSlice = createSlice({
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'rejected';
         state.error = action.error.message;
+      })
+      .addCase(fetchCurrentProduct.pending, state => {
+        state.error = undefined;
+        state.status = 'loading';
+      })
+      .addCase(fetchCurrentProduct.fulfilled, (state, action) => {
+        state.currentProduct = action.payload;
+        state.status = 'fulfilled';
+      })
+      .addCase(fetchCurrentProduct.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.error.message;
       });
   },
 });
@@ -159,6 +200,8 @@ export default productsSlice.reducer;
 export const { currentPageChanged } = productsSlice.actions;
 
 export const selectProducts = (state: RootState) => state.products.products;
+export const selectCurrentProduct = (state: RootState) =>
+  state.products.currentProduct;
 export const selectProductsStatus = (state: RootState) => state.products.status;
 export const selectProductsTotal = (state: RootState) => state.products.total;
 export const selectProductsError = (state: RootState) => state.products.error;

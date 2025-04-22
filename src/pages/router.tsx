@@ -2,7 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { ROUTES } from '../constants';
 import { AuthenticationPage } from './Authentication';
-import { EditProductPage } from './EditProduct.ts';
+import { CreateProductPage } from './CreateProduct/index.tsx';
+import { EditProductPage } from './EditProduct/index.tsx';
 import { HomePage } from './Home';
 import { ProductPage } from './Product';
 import { ProductsPage } from './Products';
@@ -24,6 +25,10 @@ export const routes = createBrowserRouter([
       {
         path: ROUTES.products + '/:productId' + '/edit',
         element: <EditProductPage />,
+      },
+      {
+        path: ROUTES.products + '/new',
+        element: <CreateProductPage />,
       },
     ],
   },

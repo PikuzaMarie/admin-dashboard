@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiEye, FiStar } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 import { CATEGORY_COLORS, PRODUCTS_TABLE_HEADERS } from '../constants';
 import { Product, ValidSortFields } from '../types';
@@ -80,15 +81,20 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
 
             <td className="px-2 py-1 text-xs text-stone-800">
               <div className="flex items-center gap-0.5">
-                <button
-                  className="mr-2 rounded-sm p-1 hover:bg-violet-100"
-                  aria-describedby="hint-id"
+                <Link
+                  to={`/products/${product.id}`}
+                  className="flex items-center"
                 >
-                  <FiEye size={18} className="text-violet-500" />
-                </button>
-                <p id="hint-id" className="textstone-800 text-xs">
-                  See details
-                </p>
+                  <button
+                    className="mr-2 rounded-sm p-1 hover:bg-violet-100"
+                    aria-describedby="hint-id"
+                  >
+                    <FiEye size={18} className="text-violet-500" />
+                  </button>
+                  <p id="hint-id" className="textstone-800 text-xs">
+                    See details
+                  </p>
+                </Link>
               </div>
             </td>
           </tr>

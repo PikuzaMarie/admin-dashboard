@@ -27,6 +27,8 @@ interface ProductsState {
 interface ProductsResponse {
   products: Product[];
   total: number;
+  skip: number;
+  limit: number;
 }
 
 const initialState: ProductsState = {
@@ -143,6 +145,7 @@ const productsSlice = createSlice({
         state.products = action.payload.products;
         state.total = action.payload.total;
         state.status = 'fulfilled';
+        state.currentPage = action.payload.skip / action.payload.limit + 1;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'rejected';

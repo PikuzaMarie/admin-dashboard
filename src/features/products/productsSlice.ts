@@ -41,6 +41,42 @@ const initialState: ProductsState = {
   currentPage: 1,
 };
 
+export const updateProduct = createAppAsyncThunk(
+  'products/updateProduct',
+  async ({
+    productId,
+    updatedProductFields,
+  }: {
+    productId: Product['id'];
+    updatedProductFields: Partial<Product>;
+  }) => {
+    const token = getToken();
+
+    const url = buildURL({
+      serverURL: SERVER_URL,
+      endpoint: PRODUCTS_ENDPOINT + '/' + productId,
+      params: {},
+    });
+
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedProductFields),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to updated product with id: ${productId}`);
+    }
+
+    const resData: ExtendedProduct = await response.json();
+
+    return resData;
+  },
+);
+
 export const fetchCurrentProduct = createAppAsyncThunk(
   'products/fetchCurrentProduct',
   async ({ productId }: { productId: Product['id'] }) => {
@@ -189,6 +225,17 @@ const productsSlice = createSlice({
         state.status = 'fulfilled';
       })
       .addCase(fetchCurrentProduct.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.error.message;
+      })
+      .addCase(updateProduct.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.currentProduct = { ...state.currentProduct, ...action.payload };
+        state.status = 'fulfilled';
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         state.status = 'rejected';
         state.error = action.error.message;
       });

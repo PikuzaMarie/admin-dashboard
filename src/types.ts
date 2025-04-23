@@ -51,6 +51,7 @@ export interface Product {
   stock: number;
   rating: number;
   thumbnail: string;
+  availabilityStatus: 'In Stock' | 'Low Stock';
 }
 
 interface ProductReview {
@@ -66,7 +67,6 @@ export interface ExtendedProduct extends Product {
   reviews: ProductReview[];
   warrantyInformation: string;
   shippingInformation: string;
-  availabilityStatus: 'In stock' | 'Low Stock';
   returnPolicy: string;
 }
 

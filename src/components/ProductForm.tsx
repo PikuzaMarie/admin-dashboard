@@ -187,7 +187,34 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           required
           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
         />
+        <p className="flex flex-col gap-1">
+          <p className="flex gap-1 text-sm">
+            <input
+              type="radio"
+              name="stockValue"
+              id="inStock"
+              value="In Stock"
+              defaultChecked={product?.availabilityStatus === 'In Stock'}
+              required
+              className="relative size-4 appearance-none rounded-full border border-stone-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-violet-600 checked:bg-violet-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:border-stone-300 disabled:bg-stone-100 disabled:before:bg-stone-400 forced-colors:appearance-auto forced-colors:before:hidden"
+            />
+            <label htmlFor="inStock">In Stock</label>
+          </p>
+          <p className="flex gap-1 text-sm">
+            <input
+              type="radio"
+              name="stockValue"
+              id="lowStock"
+              value="Low Stock"
+              defaultChecked={product?.availabilityStatus === 'Low Stock'}
+              required
+              className="relative size-4 appearance-none rounded-full border border-stone-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-violet-600 checked:bg-violet-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:border-stone-300 disabled:bg-stone-100 disabled:before:bg-stone-400 forced-colors:appearance-auto forced-colors:before:hidden"
+            />
+            <label htmlFor="lowStock">Low Stock</label>
+          </p>
+        </p>
       </p>
+
       <p className="flex justify-end gap-4">
         <button
           type="reset"

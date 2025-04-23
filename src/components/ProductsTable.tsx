@@ -1,8 +1,10 @@
 import React from 'react';
 import { FiEye, FiStar } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { CATEGORY_COLORS, PRODUCTS_TABLE_HEADERS } from '../constants';
+import { CATEGORY_COLORS, PRODUCTS_TABLE_HEADERS, ROUTES } from '../constants';
+import { fetchCurrentProduct } from '../features/products/productsSlice';
+import { useAppDispatch } from '../hooks';
 import { Product, ValidSortFields } from '../types';
 import { formatCurrency } from '../utils';
 import { SortControl } from './SortControl';
@@ -14,6 +16,14 @@ interface ProductsTableProps {
 export const ProductsTable: React.FC<ProductsTableProps> = ({
   productsData,
 }) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleGoToProductPage = (productId: number) => {
+    dispatch(fetchCurrentProduct({ productId }));
+    navigate(ROUTES.products + '/' + productId);
+  };
+
   return (
     <table className="min-w-full border-y-1 border-stone-300">
       <thead className="border-b-1 border-stone-300">
@@ -81,20 +91,16 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
 
             <td className="px-2 py-1 text-xs text-stone-800">
               <div className="flex items-center gap-0.5">
-                <Link
-                  to={`/products/${product.id}`}
-                  className="flex items-center"
+                <button
+                  className="mr-2 flex items-center gap-1 rounded-sm p-1 hover:bg-violet-100"
+                  aria-describedby="hint-id"
+                  onClick={() => handleGoToProductPage(product.id)}
                 >
-                  <button
-                    className="mr-2 rounded-sm p-1 hover:bg-violet-100"
-                    aria-describedby="hint-id"
-                  >
-                    <FiEye size={18} className="text-violet-500" />
-                  </button>
+                  <FiEye size={18} className="text-violet-500" />
                   <p id="hint-id" className="textstone-800 text-xs">
                     See details
                   </p>
-                </Link>
+                </button>
               </div>
             </td>
           </tr>

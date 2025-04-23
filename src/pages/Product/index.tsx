@@ -9,8 +9,7 @@ import {
   FiStar,
   FiTruck,
 } from 'react-icons/fi';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { Dashboard } from '../../components/Dashboard';
 import { Loader } from '../../components/Loader';
@@ -28,13 +27,13 @@ export const ProductPage: React.FC = () => {
   const product = useAppSelector(selectCurrentProduct);
   const productStatus = useAppSelector(selectProductsStatus);
 
+  let content: React.ReactNode;
+
   useEffect(() => {
-    if (Object.keys(product).length === 0 || +productId! !== product.id) {
+    if (Object.keys(product).length === 0) {
       dispatch(fetchCurrentProduct({ productId: Number(productId) }));
     }
   }, [productId, dispatch, product]);
-
-  let content: React.ReactNode;
 
   switch (productStatus) {
     case 'loading': {

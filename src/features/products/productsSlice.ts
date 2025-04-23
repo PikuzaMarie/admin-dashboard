@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createAppAsyncThunk } from '../../app/withTypes';
 import {
   ADD_ENDPOINT,
-  ITEMS_PER_PAGE_OPTIONS,
   PRODUCTS_ENDPOINT,
   PRODUCTS_FIELDS,
   SEARCH_ENDPOINT,
@@ -221,7 +220,7 @@ export const fetchProducts = createAppAsyncThunk(
     }
     const resData: ProductsResponse = await response.json();
 
-    return resData;
+    return { ...resData, limit: validatedItemsPerPage };
   },
 );
 
@@ -242,7 +241,10 @@ const productsSlice = createSlice({
         state.products = action.payload.products;
         state.total = action.payload.total;
         state.status = 'fulfilled';
-        state.currentPage = action.payload.skip / ITEMS_PER_PAGE_OPTIONS[0] + 1;
+        state.currentPage =
+          action.payload.skip > action.payload.total
+            ? 1
+            : action.payload.skip / action.payload.limit + 1;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'rejected';

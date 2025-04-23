@@ -13,6 +13,7 @@ import { Link, useParams } from 'react-router-dom';
 
 import { Dashboard } from '../../components/Dashboard';
 import { Loader } from '../../components/Loader';
+import { ROUTES } from '../../constants';
 import {
   fetchCurrentProduct,
   selectCurrentProduct,
@@ -56,9 +57,11 @@ export const ProductPage: React.FC = () => {
                   <FiEdit /> Edit
                 </button>
               </Link>
-              <button className="flex cursor-pointer items-center gap-1">
-                <FiPlus /> Create new
-              </button>
+              <Link to={`${ROUTES.products}/new`}>
+                <button className="flex cursor-pointer items-center gap-1">
+                  <FiPlus /> Create new
+                </button>
+              </Link>
             </div>
           </div>
           <article>

@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { ROUTES } from './constants';
 import { selectCurrentUserId } from './features/auth/authSlice';
-import { fetchUsers } from './features/users/usersSlice';
-import { useAppDispatch, useAppSelector } from './hooks';
+import { useAppSelector } from './hooks';
 import { AuthenticationPage } from './pages/Authentication';
 import { CreateProductPage } from './pages/CreateProduct';
 import { EditProductPage } from './pages/EditProduct';
@@ -24,9 +23,6 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 };
 
 function App() {
-  const dispatch = useAppDispatch();
-  dispatch(fetchUsers());
-
   return (
     <Router>
       <div className="App">

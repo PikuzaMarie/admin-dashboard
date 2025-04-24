@@ -2,16 +2,13 @@ import React from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { useSearchParams } from 'react-router-dom';
 
-import { ITEMS_PER_PAGE_OPTIONS } from '../constants';
-import {
-  currentPageChanged,
-  selectCurrentPage,
-} from '../features/products/productsSlice';
+import { ITEMS_PER_PAGE_OPTIONS } from '../../constants';
 import {
   validateItemsPerPage,
   validatePage,
-} from '../utils/validatePaginationParams';
-import { useAppDispatch, useAppSelector } from '../withTypes';
+} from '../../utils/validatePaginationParams';
+import { useAppDispatch, useAppSelector } from '../../withTypes';
+import { currentPageChanged, selectCurrentPage } from './productsSlice';
 
 interface PaginationProps {
   total: number;

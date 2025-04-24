@@ -3,12 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Dashboard } from '../../components/Dashboard';
 import { Loader } from '../../components/Loader';
-import { Pagination } from '../../components/Pagination';
-import { ProductsSearch } from '../../components/ProductsSearch';
-import { ProductsTable } from '../../components/ProductsTable';
 import { ITEMS_PER_PAGE_OPTIONS } from '../../constants';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useAppDispatch, useAppSelector } from '../../withTypes';
+import { Pagination } from './Pagination';
+import { ProductsSearch } from './ProductsSearch';
 import {
   fetchProducts,
   selectCurrentPage,
@@ -17,6 +16,7 @@ import {
   selectProductsStatus,
   selectProductsTotal,
 } from './productsSlice';
+import { ProductsTable } from './ProductsTable';
 
 export const ProductsPage: React.FC = () => {
   const dispatch = useAppDispatch();

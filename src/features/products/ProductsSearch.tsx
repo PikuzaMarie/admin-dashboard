@@ -1,11 +1,8 @@
 import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 
-import {
-  selectProductsStatus,
-  selectProductsTotal,
-} from '../features/products/productsSlice';
-import { Search } from './Search';
+import { Search } from '../../components/Search';
+import { selectProductsStatus, selectProductsTotal } from './productsSlice';
 
 interface ProductsSearch {
   searchTerm: string;

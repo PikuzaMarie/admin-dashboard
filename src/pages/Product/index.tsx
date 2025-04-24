@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import {
   FiAlertCircle,
-  FiArrowLeft,
   FiCheckCircle,
   FiEdit,
   FiPlus,
@@ -9,10 +8,14 @@ import {
   FiStar,
   FiTruck,
 } from 'react-icons/fi';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { Dashboard } from '../../components/Dashboard';
 import { Loader } from '../../components/Loader';
+import {
+  ProductHeader,
+  ProductHeaderLink,
+} from '../../components/ProductHeader';
 import { CATEGORY_COLORS, COLORS, ROUTES } from '../../constants';
 import {
   fetchCurrentProduct,
@@ -44,26 +47,14 @@ export const ProductPage: React.FC = () => {
     case 'fulfilled': {
       content = (
         <section>
-          <div className="mb-4 flex items-center justify-between border-b border-stone-200 pb-3">
-            <Link to=".." relative="path">
-              <button className="flex cursor-pointer items-center gap-1">
-                <FiArrowLeft />
-                <span>All Products</span>
-              </button>
-            </Link>
-            <div className="flex gap-4">
-              <Link to="edit">
-                <button className="flex cursor-pointer items-center gap-1">
-                  <FiEdit /> Edit
-                </button>
-              </Link>
-              <Link to={`${ROUTES.products}/new`}>
-                <button className="flex cursor-pointer items-center gap-1">
-                  <FiPlus /> Create new
-                </button>
-              </Link>
-            </div>
-          </div>
+          <ProductHeader backLinkText="All products">
+            <ProductHeaderLink to="edit" Icon={FiEdit} linkText="Edit" />
+            <ProductHeaderLink
+              to={`${ROUTES.products}/new`}
+              Icon={FiPlus}
+              linkText="Create New"
+            />
+          </ProductHeader>
           <article className="flex gap-6">
             <section className="flex flex-col gap-2 rounded-xl border border-stone-200">
               <figure className="m-4 w-100 rounded-xl border border-stone-200">

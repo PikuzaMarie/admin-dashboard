@@ -1,9 +1,9 @@
 import React from 'react';
-import { FiArrowLeft } from 'react-icons/fi';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Dashboard } from '../../components/Dashboard';
 import { ProductForm } from '../../components/ProductForm';
+import { ProductHeader } from '../../components/ProductHeader';
 import {
   selectCurrentProduct,
   updateProduct,
@@ -30,14 +30,7 @@ export const EditProductPage: React.FC = () => {
   };
   return (
     <Dashboard title="Edit Product">
-      <div className="flex items-center justify-between border-b border-stone-200 pb-3">
-        <Link to=".." relative="path">
-          <button className="flex cursor-pointer items-center gap-1">
-            <FiArrowLeft />
-            <span>Back</span>
-          </button>
-        </Link>
-      </div>
+      <ProductHeader backLinkText="Back" />
       <ProductForm onSubmit={handleUpdateProduct} product={product} />
     </Dashboard>
   );

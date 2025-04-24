@@ -2,8 +2,8 @@ import { Command } from 'cmdk';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { SIDEBAR_ITEMS } from '../../constants';
-import { LogOut } from './LogOut';
+import { SIDEBAR_ITEMS } from '../constants';
+import { LogOut } from '../features/auth/LogOut';
 
 interface CommandMenuProps {
   open: boolean;

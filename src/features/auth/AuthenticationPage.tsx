@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AuthForm } from '../../components/AuthForm';
 import { Loader } from '../../components/Loader';
 import { ROUTES } from '../../constants';
-import { authenticateUser } from '../../features/auth/authSlice';
-import {
-  selectAllUsers,
-  selectError,
-  selectStatus,
-} from '../../features/users/usersSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthData } from '../../types';
+import { useAppDispatch, useAppSelector } from '../../withTypes';
+import { selectAllUsers, selectError, selectStatus } from '../users/usersSlice';
+import { AuthForm } from './AuthForm';
+import { authenticateUser } from './authSlice';
 
 export const AuthenticationPage: React.FC = () => {
   const dispatch = useAppDispatch();

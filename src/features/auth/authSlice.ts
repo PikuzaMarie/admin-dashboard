@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { createAppAsyncThunk } from '../../app/withTypes';
 import {
   AUTH_ENDPOINT,
   SERVER_URL,
@@ -8,6 +7,7 @@ import {
 } from '../../constants';
 import { RootState } from '../../store';
 import { AuthData, User } from '../../types';
+import { createAppAsyncThunk } from '../../withTypes';
 import {
   getToken,
   removeToken,

@@ -7,6 +7,8 @@ import { Pagination } from '../../components/Pagination';
 import { ProductsSearch } from '../../components/ProductsSearch';
 import { ProductsTable } from '../../components/ProductsTable';
 import { ITEMS_PER_PAGE_OPTIONS } from '../../constants';
+import { useDebounce } from '../../hooks/useDebounce';
+import { useAppDispatch, useAppSelector } from '../../withTypes';
 import {
   fetchProducts,
   selectCurrentPage,
@@ -14,9 +16,7 @@ import {
   selectProductsError,
   selectProductsStatus,
   selectProductsTotal,
-} from '../../features/products/productsSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useDebounce } from '../../hooks/useDebounce';
+} from './productsSlice';
 
 export const ProductsPage: React.FC = () => {
   const dispatch = useAppDispatch();

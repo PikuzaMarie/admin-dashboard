@@ -1,5 +1,5 @@
-import { AccountInfo } from './AccountInfo';
-import { LogOut } from './LogOut';
+import { LogOut } from '../features/auth/LogOut';
+import { AccountInfo } from '../features/users/AccountInfo';
 import { MenuSearch } from './MenuSearch';
 import { RouteSelect } from './RouteSelect';
 

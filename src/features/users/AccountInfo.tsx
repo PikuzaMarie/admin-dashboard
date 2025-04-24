@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
+import { AccountToggle } from '../../components/AccountToggle';
+import { Loader } from '../../components/Loader';
 import { ROUTES } from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../withTypes';
 import {
   fetchCurrentUser,
   selectAuthError,
   selectAuthStatus,
   selectCurrentUserId,
   userLoggedOut,
-} from '../../features/auth/authSlice';
-import { getToken, getTokenDuration } from '../../features/auth/helper';
-import { selectUserById } from '../../features/users/usersSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { Loader } from '../Loader';
-import { AccountToggle } from './AccountToggle';
+} from '../auth/authSlice';
+import { getToken, getTokenDuration } from '../auth/helper';
+import { selectUserById } from './usersSlice';
 
 export const AccountInfo: React.FC = () => {
   const dispatch = useAppDispatch();

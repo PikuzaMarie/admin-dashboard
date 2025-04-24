@@ -4,12 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Dashboard } from '../../components/Dashboard';
 import { ProductForm } from '../../components/ProductForm';
 import { ProductHeader } from '../../components/ProductHeader';
-import {
-  selectCurrentProduct,
-  updateProduct,
-} from '../../features/products/productsSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Product } from '../../types';
+import { useAppDispatch, useAppSelector } from '../../withTypes';
+import { selectCurrentProduct, updateProduct } from './productsSlice';
 
 export const EditProductPage: React.FC = () => {
   const { productId } = useParams();

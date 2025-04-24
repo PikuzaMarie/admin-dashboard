@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { createAppAsyncThunk } from '../../app/withTypes';
 import {
   ADD_ENDPOINT,
   PRODUCTS_ENDPOINT,
@@ -15,6 +14,7 @@ import {
   validateItemsPerPage,
   validateSortParams,
 } from '../../utils';
+import { createAppAsyncThunk } from '../../withTypes';
 import { getToken } from '../auth/helper';
 
 interface ProductsState {

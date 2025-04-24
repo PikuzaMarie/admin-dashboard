@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 
-import { Dashboard } from '../../components/Dashboard';
-import { CategoryDistributionChart } from '../../components/Dashboard/CategoryDistributionChart';
-import { SalesChannelChart } from '../../components/Dashboard/SalesChannelChart';
-import { SalesOverviewChart } from '../../components/Dashboard/SalesOverviewChart';
-import { StatCard } from '../../components/Dashboard/StatCard';
-import { STAT_CARDS_DATA } from '../../constants';
+import { STAT_CARDS_DATA } from '../constants';
+import { CategoryDistributionChart } from './charts/CategoryDistributionChart';
+import { SalesChannelChart } from './charts/SalesChannelChart';
+import { SalesOverviewChart } from './charts/SalesOverviewChart';
+import { StatCard } from './charts/StatCard';
+import { Dashboard } from './Dashboard';
 
 export const HomePage: React.FC = () => {
   return (

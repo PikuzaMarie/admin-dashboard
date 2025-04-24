@@ -1,7 +1,7 @@
 import { FiLogOut } from 'react-icons/fi';
 
-import { userLoggedOut } from '../../features/auth/authSlice';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../withTypes';
+import { userLoggedOut } from './authSlice';
 
 export const LogOut: React.FC = () => {
   const dispatch = useAppDispatch();

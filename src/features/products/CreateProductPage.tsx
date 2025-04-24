@@ -5,9 +5,9 @@ import { Dashboard } from '../../components/Dashboard';
 import { ProductForm } from '../../components/ProductForm';
 import { ProductHeader } from '../../components/ProductHeader';
 import { ROUTES } from '../../constants';
-import { createProduct } from '../../features/products/productsSlice';
-import { useAppDispatch } from '../../hooks';
 import { Product } from '../../types';
+import { useAppDispatch } from '../../withTypes';
+import { createProduct } from './productsSlice';
 
 export const CreateProductPage: React.FC = () => {
   const dispatch = useAppDispatch();

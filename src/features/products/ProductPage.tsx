@@ -17,13 +17,13 @@ import {
   ProductHeaderLink,
 } from '../../components/ProductHeader';
 import { CATEGORY_COLORS, COLORS, ROUTES } from '../../constants';
+import { formatCurrency, formatStringifiedDate } from '../../utils';
+import { useAppDispatch, useAppSelector } from '../../withTypes';
 import {
   fetchCurrentProduct,
   selectCurrentProduct,
   selectProductsStatus,
-} from '../../features/products/productsSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { formatCurrency, formatStringifiedDate } from '../../utils';
+} from './productsSlice';
 
 export const ProductPage: React.FC = () => {
   const { productId } = useParams();

@@ -7,8 +7,8 @@ import {
   currentPageChanged,
   selectCurrentPage,
 } from '../features/products/productsSlice';
-import { useAppDispatch, useAppSelector } from '../hooks';
 import { validateItemsPerPage, validatePage } from '../utils';
+import { useAppDispatch, useAppSelector } from '../withTypes';
 
 interface PaginationProps {
   total: number;

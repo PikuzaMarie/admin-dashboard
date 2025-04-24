@@ -1,8 +1,8 @@
 import React, { FormEvent, useState } from 'react';
 
-import { AuthData, User } from '../types';
-import { Loader } from './Loader';
-import { AccountToggle } from './Sidebar/AccountToggle';
+import { AccountToggle } from '../../components/AccountToggle';
+import { Loader } from '../../components/Loader';
+import { AuthData, User } from '../../types';
 
 interface LoginPageFormFileds extends HTMLFormControlsCollection {
   username: HTMLSelectElement;

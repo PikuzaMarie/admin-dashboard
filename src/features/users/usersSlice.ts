@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { createAppAsyncThunk } from '../../app/withTypes';
 import { SERVER_URL, USERS_ENDPOINT, USERS_LIMIT } from '../../constants';
 import { RootState } from '../../store';
 import { User } from '../../types';
+import { createAppAsyncThunk } from '../../withTypes';
 
 interface UsersResponse {
   users: User[];

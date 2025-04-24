@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import { SIDEBAR_ITEMS } from '../../constants';
+import { SIDEBAR_ITEMS } from '../constants';
 
 export const RouteSelect: React.FC = () => {
   return (

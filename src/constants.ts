@@ -119,7 +119,9 @@ export const SALES_CHANNEL_DATA: {
   { name: 'Social Media', value: 18700, color: COLORS.green },
 ];
 
-export const PRODUCTS_TABLE_HEADERS: { [key in keyof Product]: string } = {
+export const PRODUCTS_TABLE_HEADERS: {
+  [key in keyof Omit<Product, 'availabilityStatus'>]: string;
+} = {
   id: 'Id',
   sku: 'SKU',
   thumbnail: 'Image',

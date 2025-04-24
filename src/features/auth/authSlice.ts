@@ -20,7 +20,6 @@ interface AuthState {
   userId: User['id'];
   status: 'idle' | 'pending' | 'authorized' | 'rejected' | 'loggedOut';
   error: string | undefined;
-  expiresIn: number;
 }
 
 interface AuthResponse {
@@ -32,7 +31,6 @@ const initialState: AuthState = {
   userId: 0,
   status: 'idle',
   error: undefined,
-  expiresIn: 0,
 };
 
 export const fetchCurrentUser = createAppAsyncThunk(

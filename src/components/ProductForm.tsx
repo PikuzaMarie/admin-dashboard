@@ -11,6 +11,7 @@ import {
   validateThumbnailURL,
   validateTitle,
 } from '../utils';
+import { Input } from './Input';
 
 interface EditProductPageFormFileds extends HTMLFormControlsCollection {
   title: HTMLInputElement;
@@ -94,65 +95,37 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <p className="flex flex-col gap-2">
-        <label
-          htmlFor="title"
-          className="block text-sm/6 font-medium text-stone-900"
-        >
-          Title
-        </label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          defaultValue={product?.title}
-          onChange={() => handleInputChange('titleError')}
-          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
-        />
-        {errors && errors.titleError && (
-          <p className="text-sm/tight text-red-800">{errors.titleError}</p>
-        )}
-      </p>
-      <p className="flex flex-col gap-2">
-        <label
-          htmlFor="description"
-          className="block text-sm/6 font-medium text-stone-900"
-        >
-          Description
-        </label>
-        <textarea
-          rows={2}
-          id="description"
-          name="description"
-          defaultValue={product?.description}
-          onChange={() => handleInputChange('descriptionError')}
-          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
-        />
-        {errors && errors.descriptionError && (
-          <p className="text-sm/tight text-red-800">
-            {errors.descriptionError}
-          </p>
-        )}
-      </p>
-      <p className="flex flex-col gap-2">
-        <label
-          htmlFor="thumbnail"
-          className="block text-sm/6 font-medium text-stone-900"
-        >
-          Thumbnail
-        </label>
-        <input
-          type="url"
-          id="thumbnail"
-          name="thumbnail"
-          defaultValue={product?.thumbnail}
-          onChange={() => handleInputChange('thumbnailError')}
-          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
-        />
-        {errors && errors.thumbnailError && (
-          <p className="text-sm/tight text-red-800">{errors.thumbnailError}</p>
-        )}
-      </p>
+      <Input
+        id="title"
+        labelText="Title"
+        errorMessage={errors.titleError}
+        inputProps={{
+          type: 'text',
+          defaultValue: product?.title,
+          onChange: () => handleInputChange('titleError'),
+        }}
+      />
+      <Input
+        id="description"
+        labelText="Description"
+        errorMessage={errors.descriptionError}
+        asTextarea
+        textareaProps={{
+          rows: 2,
+          defaultValue: product?.description,
+          onChange: () => handleInputChange('descriptionError'),
+        }}
+      />
+      <Input
+        id="thumbnail"
+        labelText="Thumbnail"
+        errorMessage={errors.thumbnailError}
+        inputProps={{
+          type: 'url',
+          defaultValue: product?.thumbnail,
+          onChange: () => handleInputChange('thumbnailError'),
+        }}
+      />
       <p className="flex flex-col gap-2">
         <label
           htmlFor="category"
@@ -193,62 +166,37 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           <p className="text-sm/tight text-red-800">{errors.categoryError}</p>
         )}
       </p>
+      <Input
+        id="brand"
+        labelText="Brand"
+        errorMessage={errors.brandError}
+        inputProps={{
+          type: 'text',
+          defaultValue: product?.brand,
+          onChange: () => handleInputChange('brandError'),
+        }}
+      />
+      <Input
+        id="price"
+        labelText="Price"
+        errorMessage={errors.priceError}
+        inputProps={{
+          type: 'text',
+          defaultValue: product?.price,
+          onChange: () => handleInputChange('priceError'),
+        }}
+      />
       <p className="flex flex-col gap-2">
-        <label
-          htmlFor="brand"
-          className="block text-sm/6 font-medium text-stone-900"
-        >
-          Brand
-        </label>
-        <input
-          type="text"
-          id="brand"
-          name="brand"
-          defaultValue={product?.brand}
-          onChange={() => handleInputChange('brandError')}
-          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
-        />
-        {errors && errors.brandError && (
-          <p className="text-sm/tight text-red-800">{errors.brandError}</p>
-        )}
-      </p>
-      <p className="flex flex-col gap-2">
-        <label
-          htmlFor="price"
-          className="block text-sm/6 font-medium text-stone-900"
-        >
-          Price
-        </label>
-        <input
-          type="text"
-          id="price"
-          name="price"
-          defaultValue={product?.price}
-          onChange={() => handleInputChange('priceError')}
-          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
-        />
-        {errors && errors.priceError && (
-          <p className="text-sm/tight text-red-800">{errors.priceError}</p>
-        )}
-      </p>
-      <p className="flex flex-col gap-2">
-        <label
-          htmlFor="stock"
-          className="block text-sm/6 font-medium text-stone-900"
-        >
-          Stock
-        </label>
-        <input
-          type="text"
+        <Input
           id="stock"
-          name="stock"
-          defaultValue={product?.stock}
-          onChange={() => handleInputChange('stockError')}
-          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
+          labelText="Stock"
+          errorMessage={errors.stockError}
+          inputProps={{
+            type: 'text',
+            defaultValue: product?.stock,
+            onChange: () => handleInputChange('stockError'),
+          }}
         />
-        {errors && errors.stockError && (
-          <p className="text-sm/tight text-red-800">{errors.stockError}</p>
-        )}
         <p className="flex flex-col gap-1">
           <p className="flex gap-1 text-sm">
             <input

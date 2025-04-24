@@ -7,7 +7,10 @@ import {
   currentPageChanged,
   selectCurrentPage,
 } from '../features/products/productsSlice';
-import { validateItemsPerPage, validatePage } from '../utils';
+import {
+  validateItemsPerPage,
+  validatePage,
+} from '../utils/validatePaginationParams';
 import { useAppDispatch, useAppSelector } from '../withTypes';
 
 interface PaginationProps {

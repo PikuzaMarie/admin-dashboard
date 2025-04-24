@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { CATEGORY_COLORS, PRODUCTS_TABLE_HEADERS, ROUTES } from '../constants';
 import { fetchCurrentProduct } from '../features/products/productsSlice';
 import { Product, ValidSortFields } from '../types';
-import { formatCurrency } from '../utils';
+import { formatCurrency } from '../utils/formatCurrency';
 import { useAppDispatch } from '../withTypes';
 import { SortControl } from './SortControl';
 

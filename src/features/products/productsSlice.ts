@@ -9,11 +9,9 @@ import {
 } from '../../constants';
 import { RootState } from '../../store';
 import { ExtendedProduct, Product } from '../../types';
-import {
-  buildURL,
-  validateItemsPerPage,
-  validateSortParams,
-} from '../../utils';
+import { buildURL } from '../../utils/buildURL';
+import { validateItemsPerPage } from '../../utils/validatePaginationParams';
+import { validateSortParams } from '../../utils/validateSortParams';
 import { createAppAsyncThunk } from '../../withTypes';
 import { getToken } from '../auth/helper';
 

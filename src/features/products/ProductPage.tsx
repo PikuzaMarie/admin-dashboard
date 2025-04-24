@@ -17,7 +17,8 @@ import {
   ProductHeaderLink,
 } from '../../components/ProductHeader';
 import { CATEGORY_COLORS, COLORS, ROUTES } from '../../constants';
-import { formatCurrency, formatStringifiedDate } from '../../utils';
+import { formatCurrency } from '../../utils/formatCurrency';
+import { formatStringifiedDate } from '../../utils/formatStringifiedDate';
 import { useAppDispatch, useAppSelector } from '../../withTypes';
 import {
   fetchCurrentProduct,

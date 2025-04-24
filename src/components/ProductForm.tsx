@@ -10,7 +10,7 @@ import {
   validateStock,
   validateThumbnailURL,
   validateTitle,
-} from '../utils';
+} from '../utils/validateProductForm';
 import { Input } from './Input';
 
 interface EditProductPageFormFileds extends HTMLFormControlsCollection {

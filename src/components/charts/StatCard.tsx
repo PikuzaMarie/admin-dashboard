@@ -3,7 +3,7 @@ import React from 'react';
 import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 
 import { StatCardType } from '../../types';
-import { formatCurrency } from '../../utils';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 export const StatCard: React.FC<StatCardType> = ({
   title,

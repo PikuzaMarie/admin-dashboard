@@ -89,3 +89,13 @@ export interface SortParams {
   sortBy: ValidSortFields;
   order: ValidOrders;
 }
+
+export interface InputErrors {
+  titleError: string;
+  descriptionError: string;
+  thumbnailError: string;
+  categoryError: string;
+  brandError: string;
+  priceError: string;
+  stockError: string;
+}

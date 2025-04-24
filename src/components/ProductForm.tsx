@@ -1,7 +1,16 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 import { CATEGORIES } from '../constants';
-import { Category, Product } from '../types';
+import { Category, InputErrors, Product } from '../types';
+import {
+  validateBrand,
+  validateCategory,
+  validateDescription,
+  validatePrice,
+  validateStock,
+  validateThumbnailURL,
+  validateTitle,
+} from '../utils';
 
 interface EditProductPageFormFileds extends HTMLFormControlsCollection {
   title: HTMLInputElement;
@@ -22,10 +31,26 @@ interface ProductFormProps {
   onSubmit: (productData: Partial<Product>) => void;
 }
 
+const initialErrors: InputErrors = {
+  titleError: '',
+  descriptionError: '',
+  thumbnailError: '',
+  categoryError: '',
+  brandError: '',
+  priceError: '',
+  stockError: '',
+};
+
 export const ProductForm: React.FC<ProductFormProps> = ({
   onSubmit,
   product,
 }) => {
+  const [errors, setErrors] = useState<InputErrors>(initialErrors);
+
+  const handleInputChange = (field: keyof InputErrors) => {
+    setErrors(prevValues => ({ ...prevValues, [field]: '' }));
+  };
+
   const handleSubmit = (e: FormEvent<EditProductPageFormElements>) => {
     e.preventDefault();
 
@@ -36,8 +61,23 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     const thumbnail = elements.thumbnail.value;
     const category = elements.category.value as Category;
     const brand = elements.brand.value;
-    const price = +elements.price.value;
-    const stock = +elements.stock.value;
+    const price = elements.price.value;
+    const stock = elements.stock.value;
+
+    const errors = {
+      titleError: validateTitle(title),
+      descriptionError: validateDescription(description),
+      thumbnailError: validateThumbnailURL(thumbnail),
+      categoryError: validateCategory(category),
+      brandError: validateBrand(brand),
+      priceError: validatePrice(price),
+      stockError: validateStock(stock),
+    };
+
+    if (Object.values(errors).join('').length > 0) {
+      setErrors(errors);
+      return;
+    }
 
     const updatedProduct = {
       title,
@@ -45,8 +85,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       thumbnail,
       category,
       brand,
-      price,
-      stock,
+      price: +price,
+      stock: +stock,
     };
 
     onSubmit(updatedProduct);
@@ -66,9 +106,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           id="title"
           name="title"
           defaultValue={product?.title}
-          required
+          onChange={() => handleInputChange('titleError')}
           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
         />
+        {errors && errors.titleError && (
+          <p className="text-sm/tight text-red-800">{errors.titleError}</p>
+        )}
       </p>
       <p className="flex flex-col gap-2">
         <label
@@ -82,11 +125,15 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           id="description"
           name="description"
           defaultValue={product?.description}
-          required
+          onChange={() => handleInputChange('descriptionError')}
           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
         />
+        {errors && errors.descriptionError && (
+          <p className="text-sm/tight text-red-800">
+            {errors.descriptionError}
+          </p>
+        )}
       </p>
-
       <p className="flex flex-col gap-2">
         <label
           htmlFor="thumbnail"
@@ -99,9 +146,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           id="thumbnail"
           name="thumbnail"
           defaultValue={product?.thumbnail}
-          required
+          onChange={() => handleInputChange('thumbnailError')}
           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
         />
+        {errors && errors.thumbnailError && (
+          <p className="text-sm/tight text-red-800">{errors.thumbnailError}</p>
+        )}
       </p>
       <p className="flex flex-col gap-2">
         <label
@@ -115,7 +165,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             id="category"
             name="category"
             defaultValue={product?.category}
-            required
+            onChange={() => handleInputChange('categoryError')}
             className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
           >
             <option value=""></option>
@@ -139,6 +189,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             />
           </svg>
         </div>
+        {errors && errors.categoryError && (
+          <p className="text-sm/tight text-red-800">{errors.categoryError}</p>
+        )}
       </p>
       <p className="flex flex-col gap-2">
         <label
@@ -152,9 +205,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           id="brand"
           name="brand"
           defaultValue={product?.brand}
-          required
+          onChange={() => handleInputChange('brandError')}
           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
         />
+        {errors && errors.brandError && (
+          <p className="text-sm/tight text-red-800">{errors.brandError}</p>
+        )}
       </p>
       <p className="flex flex-col gap-2">
         <label
@@ -168,9 +224,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           id="price"
           name="price"
           defaultValue={product?.price}
-          required
+          onChange={() => handleInputChange('priceError')}
           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
         />
+        {errors && errors.priceError && (
+          <p className="text-sm/tight text-red-800">{errors.priceError}</p>
+        )}
       </p>
       <p className="flex flex-col gap-2">
         <label
@@ -184,9 +243,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           id="stock"
           name="stock"
           defaultValue={product?.stock}
-          required
+          onChange={() => handleInputChange('stockError')}
           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-stone-900 outline-1 -outline-offset-1 outline-stone-300 focus:outline-2 focus:-outline-offset-2 focus:outline-violet-600 sm:text-sm/6"
         />
+        {errors && errors.stockError && (
+          <p className="text-sm/tight text-red-800">{errors.stockError}</p>
+        )}
         <p className="flex flex-col gap-1">
           <p className="flex gap-1 text-sm">
             <input
@@ -195,7 +257,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               id="inStock"
               value="In Stock"
               defaultChecked={product?.availabilityStatus === 'In Stock'}
-              required
               className="relative size-4 appearance-none rounded-full border border-stone-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-violet-600 checked:bg-violet-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:border-stone-300 disabled:bg-stone-100 disabled:before:bg-stone-400 forced-colors:appearance-auto forced-colors:before:hidden"
             />
             <label htmlFor="inStock">In Stock</label>
@@ -207,7 +268,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               id="lowStock"
               value="Low Stock"
               defaultChecked={product?.availabilityStatus === 'Low Stock'}
-              required
               className="relative size-4 appearance-none rounded-full border border-stone-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-violet-600 checked:bg-violet-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:border-stone-300 disabled:bg-stone-100 disabled:before:bg-stone-400 forced-colors:appearance-auto forced-colors:before:hidden"
             />
             <label htmlFor="lowStock">Low Stock</label>

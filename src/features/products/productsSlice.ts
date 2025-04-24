@@ -129,7 +129,7 @@ export const fetchCurrentProduct = createAppAsyncThunk(
       throw new Error(`Failed to fetch product with id: ${productId}`);
     }
 
-    const resData = await response.json();
+    const resData: ExtendedProduct = await response.json();
 
     return resData;
   },

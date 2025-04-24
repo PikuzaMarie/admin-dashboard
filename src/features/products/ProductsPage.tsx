@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { Dashboard } from '../../components/Dashboard';
-import { Loader } from '../../components/Loader';
+import { Dashboard } from '../../components/UI/Dashboard';
+import { Loader } from '../../components/UI/Loader';
 import { ITEMS_PER_PAGE_OPTIONS } from '../../constants';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useAppDispatch, useAppSelector } from '../../withTypes';

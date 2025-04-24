@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { FiEye, FiStar } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
-import { SortControl } from '../../components/SortControl';
+import { SortControl } from '../../components/UI/SortControl';
 import {
   CATEGORY_COLORS,
   PRODUCTS_TABLE_HEADERS,

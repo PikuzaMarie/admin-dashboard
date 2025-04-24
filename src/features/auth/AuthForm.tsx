@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 
 import { AccountToggle } from '../../components/AccountToggle';
-import { Loader } from '../../components/Loader';
+import { Loader } from '../../components/UI/Loader';
 import { AuthData, User } from '../../types';
 
 interface LoginPageFormFileds extends HTMLFormControlsCollection {

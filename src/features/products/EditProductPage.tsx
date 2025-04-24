@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Dashboard } from '../../components/Dashboard';
 import { ProductForm } from '../../components/ProductForm';
-import { ProductHeader } from '../../components/ProductHeader';
+import { Dashboard } from '../../components/UI/Dashboard';
+import { ProductHeader } from '../../components/UI/ProductHeader';
 import { Product } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../withTypes';
 import { selectCurrentProduct, updateProduct } from './productsSlice';

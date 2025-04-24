@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { AccountToggle } from '../../components/AccountToggle';
-import { Loader } from '../../components/Loader';
+import { Loader } from '../../components/UI/Loader';
 import { ROUTES } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../withTypes';
 import {

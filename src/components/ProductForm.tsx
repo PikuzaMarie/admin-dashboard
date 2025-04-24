@@ -11,7 +11,7 @@ import {
   validateThumbnailURL,
   validateTitle,
 } from '../utils/validateProductForm';
-import { Input } from './Input';
+import { Input } from './UI/Input';
 
 interface EditProductPageFormFileds extends HTMLFormControlsCollection {
   title: HTMLInputElement;

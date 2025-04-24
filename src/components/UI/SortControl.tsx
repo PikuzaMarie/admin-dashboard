@@ -2,8 +2,8 @@ import React, { memo, useCallback } from 'react';
 import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 import { useSearchParams } from 'react-router-dom';
 
-import { ValidSortFields } from '../types';
-import { validateSortParams } from '../utils/validateSortParams';
+import { ValidSortFields } from '../../types';
+import { validateSortParams } from '../../utils/validateSortParams';
 
 interface SearchControlProps {
   field: ValidSortFields;

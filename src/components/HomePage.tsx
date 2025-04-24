@@ -5,7 +5,7 @@ import { CategoryDistributionChart } from './charts/CategoryDistributionChart';
 import { SalesChannelChart } from './charts/SalesChannelChart';
 import { SalesOverviewChart } from './charts/SalesOverviewChart';
 import { StatCard } from './charts/StatCard';
-import { Dashboard } from './Dashboard';
+import { Dashboard } from './UI/Dashboard';
 
 export const HomePage: React.FC = () => {
   return (

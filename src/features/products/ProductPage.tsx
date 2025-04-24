@@ -10,12 +10,12 @@ import {
 } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
 
-import { Dashboard } from '../../components/Dashboard';
-import { Loader } from '../../components/Loader';
+import { Dashboard } from '../../components/UI/Dashboard';
+import { Loader } from '../../components/UI/Loader';
 import {
   ProductHeader,
   ProductHeaderLink,
-} from '../../components/ProductHeader';
+} from '../../components/UI/ProductHeader';
 import { CATEGORY_COLORS, COLORS, ROUTES } from '../../constants';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { formatStringifiedDate } from '../../utils/formatStringifiedDate';

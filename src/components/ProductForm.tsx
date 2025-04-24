@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useCallback, useState } from 'react';
 
 import { CATEGORIES } from '../constants';
 import { Category, InputErrors, Product } from '../types';
@@ -48,9 +48,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 }) => {
   const [errors, setErrors] = useState<InputErrors>(initialErrors);
 
-  const handleInputChange = (field: keyof InputErrors) => {
+  const handleInputChange = useCallback((field: keyof InputErrors) => {
     setErrors(prevValues => ({ ...prevValues, [field]: '' }));
-  };
+  }, []);
 
   const handleSubmit = (e: FormEvent<EditProductPageFormElements>) => {
     e.preventDefault();

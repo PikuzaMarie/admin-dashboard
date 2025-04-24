@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { FiArrowDown, FiArrowUp } from 'react-icons/fi';
 import { useSearchParams } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ interface SearchControlProps {
   field: ValidSortFields;
 }
 
-export const SortControl: React.FC<SearchControlProps> = ({ field }) => {
+export const SortControl: React.FC<SearchControlProps> = memo(({ field }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { validatedOrder, validatedSortBy } = validateSortParams(
@@ -44,4 +44,4 @@ export const SortControl: React.FC<SearchControlProps> = ({ field }) => {
       )}
     </button>
   );
-};
+});

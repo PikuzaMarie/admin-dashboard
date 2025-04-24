@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FiEye, FiStar } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,10 +19,13 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleGoToProductPage = (productId: number) => {
-    dispatch(fetchCurrentProduct({ productId }));
-    navigate(ROUTES.products + '/' + productId);
-  };
+  const handleGoToProductPage = useCallback(
+    (productId: number) => {
+      dispatch(fetchCurrentProduct({ productId }));
+      navigate(ROUTES.products + '/' + productId);
+    },
+    [dispatch, navigate],
+  );
 
   return (
     <table className="min-w-full border-y-1 border-stone-300">

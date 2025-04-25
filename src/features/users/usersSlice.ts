@@ -19,18 +19,29 @@ const initialState: {
   status: 'idle',
 };
 
-export const fetchUsers = createAppAsyncThunk('users/fetchUsers', async () => {
-  const response = await fetch(
-    SERVER_URL + USERS_ENDPOINT + `?limit=${USERS_LIMIT}`,
-  );
+export const fetchUsers = createAppAsyncThunk(
+  'users/fetchUsers',
+  async () => {
+    const response = await fetch(
+      SERVER_URL + USERS_ENDPOINT + `?limit=${USERS_LIMIT}`,
+    );
 
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
 
-  const data: UsersResponse = await response.json();
-  return data.users;
-});
+    const data: UsersResponse = await response.json();
+    return data.users;
+  },
+  {
+    condition(_, thunkApi) {
+      const usersStatus = selectStatus(thunkApi.getState());
+      if (usersStatus !== 'idle') {
+        return false;
+      }
+    },
+  },
+);
 
 const usersSlice = createSlice({
   name: 'users',

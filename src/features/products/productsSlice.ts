@@ -131,6 +131,14 @@ export const fetchCurrentProduct = createAppAsyncThunk(
 
     return resData;
   },
+  {
+    condition(_, thunkApi) {
+      const productsStatus = selectProductsStatus(thunkApi.getState());
+      if (productsStatus === 'loading') {
+        return false;
+      }
+    },
+  },
 );
 
 export const fetchProducts = createAppAsyncThunk(
@@ -219,6 +227,14 @@ export const fetchProducts = createAppAsyncThunk(
     const resData: ProductsResponse = await response.json();
 
     return { ...resData, limit: validatedItemsPerPage };
+  },
+  {
+    condition(_, thunkApi) {
+      const productsStatus = selectProductsStatus(thunkApi.getState());
+      if (productsStatus === 'loading') {
+        return false;
+      }
+    },
   },
 );
 

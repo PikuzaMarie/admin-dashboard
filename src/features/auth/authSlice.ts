@@ -52,6 +52,14 @@ export const fetchCurrentUser = createAppAsyncThunk(
     const user: User = await response.json();
     return user;
   },
+  {
+    condition(_, thunkApi) {
+      const authStatus = selectAuthStatus(thunkApi.getState());
+      if (authStatus === 'pending') {
+        return false;
+      }
+    },
+  },
 );
 
 export const authenticateUser = createAppAsyncThunk(

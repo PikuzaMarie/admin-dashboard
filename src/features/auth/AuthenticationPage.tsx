@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Error } from '../../components/Error';
 import { Loader } from '../../components/UI/Loader';
 import { ROUTES } from '../../constants';
 import { AuthData } from '../../types';
@@ -17,7 +18,6 @@ import { authenticateUser } from './authSlice';
 export const AuthenticationPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [error, setError] = useState<string | undefined>('');
 
   const fetchingError = useAppSelector(selectError);
   const fetchingStatus = useAppSelector(selectStatus);
@@ -28,17 +28,9 @@ export const AuthenticationPage: React.FC = () => {
   }, [dispatch]);
 
   async function handleAuthenticate(authData: AuthData) {
-    try {
-      await dispatch(authenticateUser(authData)).unwrap();
+    await dispatch(authenticateUser(authData));
 
-      navigate(ROUTES.home);
-    } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : 'Failed to authenticate user. Check your credentials';
-      setError(message);
-    }
+    navigate(ROUTES.home);
   }
 
   let content: React.ReactNode;
@@ -55,7 +47,7 @@ export const AuthenticationPage: React.FC = () => {
       break;
     }
     case 'failed': {
-      setError(fetchingError);
+      content = <Error message={fetchingError} />;
       break;
     }
   }
@@ -72,7 +64,6 @@ export const AuthenticationPage: React.FC = () => {
           </p>
         </div>
         {content}
-        {error && <p>Error occured: {error}</p>}
       </section>
     </main>
   );

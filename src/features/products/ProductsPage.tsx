@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { Error } from '../../components/Error';
 import { Dashboard } from '../../components/UI/Dashboard';
 import { Loader } from '../../components/UI/Loader';
 import { ITEMS_PER_PAGE_OPTIONS } from '../../constants';
@@ -101,7 +102,7 @@ export const ProductsPage: React.FC = () => {
       break;
     }
     case 'rejected': {
-      content = <p>Error occured while fetching products:{productsError}</p>;
+      content = <Error message={productsError} />;
       break;
     }
     default: {

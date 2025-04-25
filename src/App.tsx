@@ -2,6 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { HomePage } from './components/HomePage';
+import { NotFoundPage } from './components/NotFoundPage';
 import { RootLayout } from './components/RootLayout';
 import { ROUTES } from './constants';
 import { AuthenticationPage } from './features/auth/AuthenticationPage';
@@ -47,6 +48,7 @@ function App() {
                     path={`${ROUTES.products}/new`}
                     element={<CreateProductPage />}
                   />
+                  <Route path="*" element={<NotFoundPage />} />
                 </Routes>
               </ProtectedRoute>
             }

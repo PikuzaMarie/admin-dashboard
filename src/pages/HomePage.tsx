@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 
 import { CategoryDistributionChart } from '../components/charts/CategoryDistributionChart';
-import { SalesChannelChart } from '../components/charts/SalesChannelChart';
 import { SalesOverviewChart } from '../components/charts/SalesOverviewChart';
 import { StatCard } from '../components/charts/StatCard';
 import { Dashboard } from '../components/UI/Dashboard';
@@ -24,8 +23,6 @@ export const HomePage: React.FC = () => {
         <SalesOverviewChart />
         <CategoryDistributionChart />
       </div>
-
-      <SalesChannelChart />
     </Dashboard>
   );
 };

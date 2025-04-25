@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 
 import { DailySalesTrend } from '../components/charts/DialySalesChart';
+import { SalesChannelChart } from '../components/charts/SalesChannelChart';
 import { StatCard } from '../components/charts/StatCard';
 import { Dashboard } from '../components/UI/Dashboard';
 import { SALES_STATS } from '../constants';
@@ -38,6 +39,7 @@ export const SalesPage: React.FC = () => {
         />
       </motion.div>
       <DailySalesTrend />
+      <SalesChannelChart />
     </Dashboard>
   );
 };

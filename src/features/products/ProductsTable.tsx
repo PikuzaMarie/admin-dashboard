@@ -66,7 +66,7 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
               {product.id}
             </td>
             <td className="px-2 py-1 text-xs font-medium whitespace-nowrap text-stone-800">
-              {product.sku}
+              {product.sku ?? 'XXXUKWN'}
             </td>
             <td className="block w-25 px-2 py-1 text-xs font-medium whitespace-nowrap">
               <img src={product.thumbnail} alt={product.title} />
@@ -96,7 +96,7 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
             <td className="px-2 py-1 text-xs text-stone-800">
               <div className="flex items-center gap-1">
                 <FiStar className="fill-yellow-500 text-yellow-500" />
-                {product.rating}
+                {product.rating ?? 0}
               </div>
             </td>
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { Dashboard } from '../components/UI/Dashboard';
 import { ROUTES } from '../constants';
-import { Dashboard } from './UI/Dashboard';
 
 export const NotFoundPage: React.FC = () => {
   return (

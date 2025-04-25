@@ -35,7 +35,7 @@ export const fetchUsers = createAppAsyncThunk(
   },
   {
     condition(_, thunkApi) {
-      const usersStatus = selectStatus(thunkApi.getState());
+      const usersStatus = selectUsersStatus(thunkApi.getState());
       if (usersStatus !== 'idle') {
         return false;
       }
@@ -67,5 +67,5 @@ export default usersSlice.reducer;
 export const selectAllUsers = (state: RootState) => state.users.users;
 export const selectUserById = (state: RootState, userId: User['id']) =>
   state.users.users.find(user => user.id === userId);
-export const selectError = (state: RootState) => state.users.error;
-export const selectStatus = (state: RootState) => state.users.status;
+export const selectUsersError = (state: RootState) => state.users.error;
+export const selectUsersStatus = (state: RootState) => state.users.status;

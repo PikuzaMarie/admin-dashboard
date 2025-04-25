@@ -9,8 +9,8 @@ import { useAppDispatch, useAppSelector } from '../../withTypes';
 import {
   fetchUsers,
   selectAllUsers,
-  selectError,
-  selectStatus,
+  selectUsersError,
+  selectUsersStatus,
 } from '../users/usersSlice';
 import { AuthForm } from './AuthForm';
 import { authenticateUser } from './authSlice';
@@ -19,8 +19,8 @@ export const AuthenticationPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const fetchingError = useAppSelector(selectError);
-  const fetchingStatus = useAppSelector(selectStatus);
+  const fetchingUsersError = useAppSelector(selectUsersError);
+  const fetchingUsersStatus = useAppSelector(selectUsersStatus);
   const fetchedUsers = useAppSelector(selectAllUsers);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const AuthenticationPage: React.FC = () => {
 
   let content: React.ReactNode;
 
-  switch (fetchingStatus) {
+  switch (fetchingUsersStatus) {
     case 'loading': {
       content = <Loader message="Loading users..." />;
       break;
@@ -47,7 +47,7 @@ export const AuthenticationPage: React.FC = () => {
       break;
     }
     case 'failed': {
-      content = <Error message={fetchingError} />;
+      content = <Error message={fetchingUsersError} />;
       break;
     }
   }

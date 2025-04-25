@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Error } from '../../components/Error';
+import { StoreLogo } from '../../components/StoreLogo';
 import { Loader } from '../../components/UI/Loader';
 import { ROUTES } from '../../constants';
 import { AuthData } from '../../types';
@@ -56,6 +57,9 @@ export const AuthenticationPage: React.FC = () => {
     <main>
       <section className="relative mt-[calc(20vh)] flex flex-col gap-6 justify-self-center rounded-xl border-1 border-stone-100 bg-stone-100 p-20">
         <div className="flex flex-col gap-2">
+          <div className="mb-4 flex self-center">
+            <StoreLogo />
+          </div>
           <h2 className="text-center text-4xl font-semibold text-stone-950">
             Welcome back
           </h2>

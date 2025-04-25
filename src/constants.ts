@@ -1,9 +1,4 @@
-import {
-  FiDollarSign,
-  FiHome,
-  FiShoppingBag,
-  FiShoppingCart,
-} from 'react-icons/fi';
+import { FiDollarSign, FiHome, FiShoppingBag } from 'react-icons/fi';
 
 import { Category, Product, SidebarItem, StatCardType } from './types';
 
@@ -34,7 +29,6 @@ export const ROUTES = {
   home: '/',
   products: '/products',
   sales: '/sales',
-  orders: '/orders',
 };
 
 export const COLORS: { [key: string]: string } = {
@@ -49,7 +43,6 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   { name: 'Home', Icon: FiHome, href: ROUTES.home },
   { name: 'Products', Icon: FiShoppingBag, href: ROUTES.products },
   { name: 'Sales', Icon: FiDollarSign, href: ROUTES.sales },
-  { name: 'Orders', Icon: FiShoppingCart, href: ROUTES.orders },
 ];
 
 export const STAT_CARDS_DATA: StatCardType[] = [

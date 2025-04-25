@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Loader } from '../../components/UI/Loader';
 import { ROUTES } from '../../constants';
 import { AuthData } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../withTypes';
-import { selectAllUsers, selectError, selectStatus } from '../users/usersSlice';
+import {
+  fetchUsers,
+  selectAllUsers,
+  selectError,
+  selectStatus,
+} from '../users/usersSlice';
 import { AuthForm } from './AuthForm';
 import { authenticateUser } from './authSlice';
 
@@ -17,6 +22,10 @@ export const AuthenticationPage: React.FC = () => {
   const fetchingError = useAppSelector(selectError);
   const fetchingStatus = useAppSelector(selectStatus);
   const fetchedUsers = useAppSelector(selectAllUsers);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   async function handleAuthenticate(authData: AuthData) {
     try {

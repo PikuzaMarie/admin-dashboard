@@ -53,6 +53,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ open, setOpen }) => {
           <Command.Group
             heading="Pages"
             className="mb-3 text-sm text-stone-400"
+            onClick={() => setOpen(false)}
           >
             {SIDEBAR_ITEMS.map(({ Icon, name, href }) => (
               <Link to={href}>

@@ -57,7 +57,11 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
       </thead>
       <tbody className="divide-y divide-stone-200">
         {productsData.map(product => (
-          <tr key={product.id} className="cursor-pointer hover:bg-stone-50">
+          <tr
+            key={product.id}
+            className="cursor-pointer hover:bg-stone-50"
+            onClick={() => handleGoToProductPage(product.id)}
+          >
             <td className="px-2 py-1 text-xs font-medium whitespace-nowrap text-stone-800">
               {product.id}
             </td>
@@ -101,7 +105,6 @@ export const ProductsTable: React.FC<ProductsTableProps> = ({
                 <button
                   className="mr-2 flex items-center gap-1 rounded-sm p-1 hover:bg-violet-100"
                   aria-describedby="hint-id"
-                  onClick={() => handleGoToProductPage(product.id)}
                 >
                   <FiEye size={18} className="text-violet-500" />
                   <p id="hint-id" className="textstone-800 text-xs">

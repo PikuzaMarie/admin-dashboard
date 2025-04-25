@@ -11,6 +11,7 @@ import { ProductPage } from './features/products/ProductPage';
 import { ProductsPage } from './features/products/ProductsPage';
 import { HomePage } from './pages/HomePage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { SalesPage } from './pages/SalesPage';
 import { useAppSelector } from './withTypes';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -48,6 +49,7 @@ function App() {
                     path={`${ROUTES.products}/new`}
                     element={<CreateProductPage />}
                   />
+                  <Route path={ROUTES.sales} element={<SalesPage />} />
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>
               </ProtectedRoute>

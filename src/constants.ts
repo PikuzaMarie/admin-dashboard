@@ -1,11 +1,8 @@
 import {
   FiDollarSign,
   FiHome,
-  FiSettings,
   FiShoppingBag,
   FiShoppingCart,
-  FiTrendingUp,
-  FiUsers,
 } from 'react-icons/fi';
 
 import { Category, Product, SidebarItem, StatCardType } from './types';
@@ -36,11 +33,8 @@ export const ROUTES = {
   auth: '/auth',
   home: '/',
   products: '/products',
-  users: '/users',
   sales: '/sales',
   orders: '/orders',
-  analytics: '/analytics',
-  settings: '/settings',
 };
 
 export const COLORS: { [key: string]: string } = {
@@ -54,11 +48,8 @@ export const COLORS: { [key: string]: string } = {
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   { name: 'Home', Icon: FiHome, href: ROUTES.home },
   { name: 'Products', Icon: FiShoppingBag, href: ROUTES.products },
-  { name: 'Users', Icon: FiUsers, href: ROUTES.users },
   { name: 'Sales', Icon: FiDollarSign, href: ROUTES.sales },
   { name: 'Orders', Icon: FiShoppingCart, href: ROUTES.orders },
-  { name: 'Analytics', Icon: FiTrendingUp, href: ROUTES.analytics },
-  { name: 'Settings', Icon: FiSettings, href: ROUTES.settings },
 ];
 
 export const STAT_CARDS_DATA: StatCardType[] = [
@@ -188,3 +179,9 @@ export const CATEGORIES = [
   'womens-shoes',
   'womens-watches',
 ];
+
+export const SALES_STATS = {
+  totalRevenue: 1_234_567,
+  totalProfit: 78.9,
+  averageOrderPrice: 196 / 78,
+};
